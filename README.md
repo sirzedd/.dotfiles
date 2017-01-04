@@ -1,2 +1,3 @@
 # dotfiles
-Vim/Tmux
+Vim/Tmux config files so I can track changes
+
