@@ -1,3 +1,18 @@
+set nocompatible
+filetype plugin indent on
+execute pathogen#infect()
+
+"Buffer plugin
+", be - normal open
+", bt - toggle open/close
+", bs - horizontal split open
+", bv - vertical split open
+"push t on buffer to open in tab
+"
+
+"set nowrap
+set nowrap
+
 set relativenumber
 set ruler
 set visualbell
@@ -8,8 +23,54 @@ set expandtab
 
 set backspace=2 " more powerful backspacing
 
+" ===== adding indenting visual. Can turn on/off with leader - ig
+set ts=4 sw=4 et
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup=1
+
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
 
+" ctrl-space autocomplete
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+      \ "\<lt>C-n>" :
+      \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+      \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+      \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" Replace word under cursor globally
+nnoremap <Leader>a :%s/\<<C-r><C-w>\>/
+
+" Replace word under cursor in line
+nnoremap <Leader>s :s/\<<C-r><C-w>\>/
+
+" http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" When the page starts to scroll, keep the cursor 8 lines from the top and 8
+" lines from the bottom
+set scrolloff=8
+
+
+
+" remap VIM 0 to first non-blank character
+map 0 ^
+
+"use spaces instead of tabs 
+set expandtab
+
+"be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
+
+
+"<======= Highlighting for file =========>
+autocmd BufEnter *.xml :setlocal filetype=xml
 
 set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
@@ -36,14 +97,16 @@ autocmd BufWinLeave * call clearmatches()
 
 " Solarized
 syntax on
+syntax enable
+"colorscheme monokai
 set background=dark
 let g:solarized_termcolors = 256
 colorscheme desert
 
 " leader key
-" let mapleader = ','
+let mapleader = ','
 " Leader - ( Spacebar )
-let mapleader = " "
+" let mapleader = " "
 
 
 " searching
@@ -159,45 +222,27 @@ set wildignore+=*/target/* "sbt target directory"
 " colorcolumn / print margin red bar 
 :set colorcolumn=100
 
-set cursorline    " highlight the current line
+"set cursorline    " highlight the current line
 
-call plug#begin('~/.vim/plugged')
+" Faster copy to clipboard and pasting from clipboard
+set clipboard=unnamed
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 
-" https://github.com/junegunn/vim-easy-align
-" Plug 'junegunn/vim-easy-align'
-
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-Plug 'kien/rainbow_parentheses.vim'
-
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'mxw/vim-jsx'
-
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'othree/xml.vim'
-
-" https://github.com/easymotion/vim-easymotion
-Plug 'easymotion/vim-easymotion'
-
-Plug 'tpope/vim-fugitive'
-
-Plug 'airblade/vim-gitgutter'
-
-call plug#end()
+" Highlights all words that are the same as cursor is on
+" http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
+" :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 " Basic SETUP:
 set filetype=dosini
 
-set nocompatible
-
-syntax enable
 filetype plugin on
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
-set path+=**
+" set path+=**
 
 
 " NOW WE CAN
@@ -218,7 +263,7 @@ set path+=**
 
 " FILE BROWSING:
 " Tweaks for browsing
-let g:netrw_banner=0         " disable annoying banner
+" let g:netrw_banner=0         " disable annoying banner
 " let g:netrw_browse_split=4   " open in prior window
 " let g:netrw_altv=1           " open splits to the right
 " let g:netrw_liststyle=3      " tree view
@@ -233,17 +278,18 @@ let g:netrw_banner=0         " disable annoying banner
 "SNIPPET
 "
 nnoremap ,stest :-1read $HOME/.vim/snippets/.spock-test.groovy<CR>wi
+nnoremap ,bash :-1read $HOME/.vim/snippets/bash-script-start<CR>wi
 
 " NERDTREE:
 "
 "Open NERDTree automatically when vim starts up if no files were
 "specified.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 
 " Rainbow parantheses
@@ -319,4 +365,27 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! 
 nnoremap \ :Ag<SPACE>
+
+"Powerline
+set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h15
+let g:Powerline_symbols = 'fancy'
+set encoding=utf-8
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
+
+"MacVim powerline
+if has("gui_running")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set guifont=IMeslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h15
+  endif
+endif
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+set rtp+=~/Google\ Drive/files/global/configs/vim/.vim/bundle/powerline/powerline/bindings/vim/
 
