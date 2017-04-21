@@ -29,6 +29,10 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 let g:indent_guides_enable_on_vim_startup=1
 
+
+" allow jsx in js
+let g:jsx_ext_required = 0
+
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
 
 " ctrl-space autocomplete
@@ -49,11 +53,10 @@ nnoremap <Leader>s :s/\<<C-r><C-w>\>/
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+
 " When the page starts to scroll, keep the cursor 8 lines from the top and 8
 " lines from the bottom
 set scrolloff=8
-
-
 
 " remap VIM 0 to first non-blank character
 map 0 ^
@@ -101,7 +104,7 @@ syntax enable
 "colorscheme monokai
 set background=dark
 let g:solarized_termcolors = 256
-colorscheme desert
+colorscheme desert2
 
 " leader key
 let mapleader = ','
@@ -365,6 +368,21 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw! 
 nnoremap \ :Ag<SPACE>
+
+"cursor color
+":hi CursorLine guifg=red guibg=blue
+"
+"highlight CursorLine ctermbg=Yellow ctermfg=None
+"autocmd InsertEnter * highlight CursorLine ctermbg=Green ctermfg=Red
+"autocmd InsertLeave * highlight CursorLine ctermbg=Yellow ctermfg=None
+
+"set cursorline
+"autocmd InsertEnter * highlight CursorLine guifg=white guibg=blue ctermfg=white ctermbg=blue
+"autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
+
+"Change search color
+"hi Search guibg=peru guifg=wheat
+"hi Search cterm=None ctermfg=grey ctermbg=blue
 
 "Powerline
 set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h15
