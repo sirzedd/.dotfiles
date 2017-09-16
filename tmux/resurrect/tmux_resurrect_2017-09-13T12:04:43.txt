@@ -1,0 +1,36 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	13	1	:zsh	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/komodo-monitor	1	zsh	:
+pane	13	1	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/jmx-viewer	0	zsh	:
+pane	13	1	:zsh	0	:	3	:/Users/jhendricks/Google Drive/home	0	zsh	:
+pane	13	2	:zsh	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/testbed/wumbler	0	zsh	:
+pane	13	2	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/sm-spring-boot	0	zsh	:
+pane	13	2	:zsh	0	:	3	:/Users/jhendricks/files/dev/apps/gitlab/sm-curator	1	zsh	:
+pane	13	3	:zsh	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/sm-source-pro	0	zsh	:
+pane	13	3	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/zipkin-client	1	zsh	:
+pane	13	3	:zsh	0	:	3	:/Users/jhendricks/files/dev/apps/gitlab/pro	0	zsh	:
+pane	13	3	:zsh	0	:	4	:/Users/jhendricks/files/dev/apps/gitlab/root	0	zsh	:
+pane	13	4	:node	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/komodo-monitor	1	node	:npm   
+pane	13	4	:node	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/jmx-viewer	0	zsh	:
+pane	13	5	:zsh	0	:-	1	:/Users/jhendricks/files/dev/apps/gitlab/pro	1	zsh	:
+pane	13	6	:[tmux]	1	:*	1	:/Users/jhendricks/files/dev/apps/gitlab/ha-zipkin-jersey-client	1	zsh	:
+pane	13	6	:[tmux]	1	:*	2	:/Users/jhendricks/files/dev/apps/gitlab/sm-source-pro	0	zsh	:
+pane	3	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	4	1	:node	1	:*	1	:/Users/jhendricks/files/dev/apps/gitlab/komodo-monitor	1	zsh	:
+pane	5	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	6	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+window	0	1	1	:*	ae9e,204x50,0,0,1
+window	13	1	0	:	e498,204x49,0,0{102x49,0,0[102x24,0,0,119,102x24,0,25,121],101x49,103,0,120}
+window	13	2	0	:	792e,204x49,0,0{102x49,0,0,124,101x49,103,0[101x24,103,0,125,101x24,103,25,126]}
+window	13	3	0	:	c575,204x49,0,0[204x39,0,0{102x39,0,0,127,101x39,103,0,137},204x9,0,40{102x9,0,40,129,101x9,103,40,138}]
+window	13	4	0	:	0108,204x49,0,0{91x49,0,0,139,112x49,92,0,141}
+window	13	5	0	:-	b471,204x49,0,0,140
+window	13	6	1	:*	e7ef,204x49,0,0{102x49,0,0,147,101x49,103,0,150}
+window	3	1	1	:*	5785,204x50,0,0,16
+window	4	1	1	:*	5786,204x50,0,0,17
+window	5	1	1	:*	5787,204x50,0,0,18
+window	6	1	1	:*	5788,204x50,0,0,19
+window	7	1	1	:*	e0f6,140x36,0,0,27
+window	8	1	1	:*	6533,126x47,0,0,33
+state	13	8

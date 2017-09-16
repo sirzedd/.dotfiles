@@ -1,0 +1,40 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	4	1	:node	0	:-	1	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	0	zsh	:
+pane	4	1	:node	0	:-	2	:/Users/jhendricks/files/dev/apps/gitlab/komodo-monitor	1	zsh	:
+pane	4	1	:node	0	:-	3	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	0	zsh	:
+pane	4	1	:node	0	:-	4	:/usr/local/ha-microservices/logs	0	zsh	:
+pane	4	2	:Vim	0	:	1	:/Users/jhendricks/files/dev/apps/sm-core	0	zsh	:
+pane	4	2	:Vim	0	:	2	:/Users/jhendricks/files/dev/apps/cmt	1	zsh	:
+pane	4	2	:Vim	0	:	3	:/Users/jhendricks/files/dev/apps/gitlab/sm-search	0	zsh	:
+pane	4	2	:Vim	0	:	4	:/Users/jhendricks/files/dev/apps/gitlab/sm-source	0	zsh	:
+pane	4	2	:Vim	0	:	5	:/Users/jhendricks/files/dev/apps/gitlab/ha-category-task-core	0	zsh	:
+pane	4	2	:Vim	0	:	6	:/Users/jhendricks/files/dev/apps	0	zsh	:
+pane	4	3	:zsh	0	:	1	:/Users/jhendricks/files/dev/apps/root	0	zsh	:
+pane	4	3	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/sm-core	0	zsh	:
+pane	4	3	:zsh	0	:	3	:/Users/jhendricks/files/dev/apps/sm-cache	0	zsh	:
+pane	4	3	:zsh	0	:	4	:/Users/jhendricks/files/dev/apps/sm-core-webapp	0	zsh	:
+pane	4	3	:zsh	0	:	5	:/Users/jhendricks/files/dev/apps/sm-recent-activity-server	0	zsh	:
+pane	4	3	:zsh	0	:	6	:/Users/jhendricks/files/dev/apps/gitlab/best-match-client	0	zsh	:
+pane	4	3	:zsh	0	:	7	:/Users/jhendricks/files/dev/apps/gitlab/sm-api-client	1	zsh	:
+pane	4	3	:zsh	0	:	8	:/Users/jhendricks/files/dev/apps/gitlab/sm-source-root	0	zsh	:
+pane	4	3	:zsh	0	:	9	:/Users/jhendricks/files/dev/apps/gitlab/sm-base-pom	0	zsh	:
+pane	4	4	:java	1	:*	1	:/Users/jhendricks/files/dev/tools/pomexplorer/pom-explorer	1	zsh	:
+pane	4	5	:zsh	0	:	1	:/Users/jhendricks/dotfiles	1	zsh	:
+pane	7	1	:zsh	0	:-	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	2	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	3	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	4	:/Users/jhendricks	0	zsh	:
+pane	7	2	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	7	3	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+window	0	1	1	:*	c35e,238x64,0,0,1
+window	4	1	0	:-	2399,204x50,0,0{103x50,0,0[103x26,0,0,2,103x23,0,27,3],100x50,104,0[100x27,104,0,4,100x22,104,28,5]}
+window	4	2	0	:	e680,204x50,0,0{102x50,0,0[102x26,0,0,6,102x23,0,27,7],101x50,103,0[101x13,103,0,8,101x11,103,14,9,101x12,103,26,10,101x11,103,39,11]}
+window	4	3	0	:	2d72,204x50,0,0[204x26,0,0{102x26,0,0[102x17,0,0,12,102x8,0,18,13],101x26,103,0[101x16,103,0,14,101x2,103,17,15,101x6,103,20,16]},204x23,0,27[204x15,0,27{107x15,0,27,17,48x15,108,27,18,47x15,157,27,29},204x7,0,43,19]]
+window	4	4	1	:*	d77f,204x50,0,0,20
+window	4	5	0	:	5782,204x50,0,0,32
+window	7	1	0	:-	34f8,238x64,0,0{113x64,0,0,22,62x64,114,0,23,61x64,177,0[61x32,177,0,24,61x31,177,33,25]}
+window	7	2	0	:	e1e5,238x64,0,0,26
+window	7	3	1	:*	e1e6,238x64,0,0,27
+window	8	1	1	:*	e1e7,238x64,0,0,28
+state	4	8

@@ -1,0 +1,16 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	2	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	3	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	4	:/Users/jhendricks	0	zsh	:
+pane	7	2	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	7	3	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	9	1	:Vim	1	:*	1	:/Users/jhendricks/files/dev/apps/cmt	1	zsh	:
+window	0	1	1	:*	bebd,137x44,0,0,0
+window	7	1	0	:-	cd05,137x44,0,0{79x44,0,0,1,28x44,80,0,2,28x44,109,0[28x22,109,0,3,28x21,109,23,4]}
+window	7	2	0	:	bec2,137x44,0,0,5
+window	7	3	1	:*	bec3,137x44,0,0,6
+window	8	1	1	:*	bec4,137x44,0,0,7
+window	9	1	1	:*	59e5,238x60,0,0,16
+state	9	8

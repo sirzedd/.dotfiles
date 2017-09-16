@@ -33,6 +33,31 @@ let g:indent_guides_enable_on_vim_startup=1
 " allow jsx in js
 let g:jsx_ext_required = 0
 
+
+"" vim-javacomplete2  https://github.com/artur-shaik/vim-javacomplete2
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"
+"" enable smart (trying to guess import option) inserting class import with F4
+"nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+"imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+"
+"" To enable usual (will ask for import option) inserting class imports with F5, add:
+"nmap <F5> <Plug>(JavaComplete-Imports-Add)
+"imap <F5> <Plug>(JavaComplete-Imports-Add)
+"
+"" To add all missing imports with F6:
+"nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+"imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+"
+""To remove all unused imports with F7:
+"nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+"imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+
+
+
+
+
+
 nnoremap <silent> <leader>, :noh<cr> " Stop highlight after searching
 
 " ctrl-space autocomplete

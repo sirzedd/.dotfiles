@@ -1,0 +1,32 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	2	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	3	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	4	:/Users/jhendricks	0	zsh	:
+pane	7	2	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	7	3	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	9	1	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	9	1	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/zipkin-collector	0	zsh	:
+pane	9	2	:zsh	1	:*	1	:	0	sudo	:sudo ./bin/kafka-server-start.sh config/server.properties
+pane	9	2	:zsh	1	:*	2	:/Users/jhendricks/files/dev/tools/zipkin/zipkindemo-master/zipkindemoapp	0	zsh	:
+pane	9	2	:zsh	1	:*	3	:/Users/jhendricks/files/dev/examples/spring-cloud-sleuth-sample-zipkin	0	zsh	:
+pane	9	2	:zsh	1	:*	4	:/Users/jhendricks/files/dev/tools/zookeeper-3.4.8/bin	1	bash	:bash ./zkCli.sh -server localhost:2181
+pane	9	2	:zsh	1	:*	5	:/Users/jhendricks/files/dev/tools/zipkin/zipkindemo-master	0	zsh	:
+pane	9	3	:zsh	0	:-	1	:/Users/jhendricks/files/dev/apps/gitlab/zipkin-client	1	zsh	:
+pane	9	3	:zsh	0	:-	2	:/Users/jhendricks/files/dev/apps/gitlab/zipkin-client	0	zsh	:
+pane	9	4	:zsh	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/elasticsearch/docker	1	zsh	:
+pane	9	4	:zsh	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/elasticsearch	0	zsh	:
+pane	9	4	:zsh	0	:	3	:/Users/jhendricks/files/dev/apps/gitlab/elasticsearch	0	zsh	:
+pane	9	5	:Vim	0	:	1	:/Users/jhendricks/files/dev/apps/sm-search-scripts	1	zsh	:
+window	0	1	1	:*	bebd,137x44,0,0,0
+window	7	1	0	:-	cd05,137x44,0,0{79x44,0,0,1,28x44,80,0,2,28x44,109,0[28x22,109,0,3,28x21,109,23,4]}
+window	7	2	0	:	bec2,137x44,0,0,5
+window	7	3	1	:*	bec3,137x44,0,0,6
+window	8	1	1	:*	bec4,137x44,0,0,7
+window	9	1	0	:	bbca,238x64,0,0{136x64,0,0,8,101x64,137,0,9}
+window	9	2	1	:*	c90d,238x64,0,0{122x64,0,0[122x14,0,0,17,122x24,0,15,18,122x24,0,40,20],115x64,123,0[115x34,123,0,11,115x29,123,35,19]}
+window	9	3	0	:-	4e3b,238x64,0,0[238x32,0,0,12,238x31,0,33,21]
+window	9	4	0	:	4a1d,238x64,0,0{122x64,0,0[122x34,0,0,13,122x29,0,35,14],115x64,123,0,15}
+window	9	5	0	:	61e5,238x64,0,0,16
+state	9	8

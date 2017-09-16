@@ -1,0 +1,27 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	4	1	:node	1	:*	1	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	1	node	:npm   
+pane	4	1	:node	1	:*	2	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	0	jconsole	:/usr/bin/jconsole
+pane	4	2	:Vim	0	:	1	:/Users/jhendricks/files/dev/apps/sm-core	0	zsh	:
+pane	4	2	:Vim	0	:	2	:/Users/jhendricks/files/dev/apps/cmt	1	zsh	:
+pane	4	2	:Vim	0	:	3	:/Users/jhendricks/files/dev/apps/gitlab/sm-search	0	zsh	:
+pane	4	2	:Vim	0	:	4	:/Users/jhendricks/files/dev/apps/gitlab/sm-source	0	zsh	:
+pane	4	2	:Vim	0	:	5	:/Users/jhendricks/files/dev/apps/gitlab/ha-category-task-core	0	zsh	:
+pane	4	2	:Vim	0	:	6	:/Users/jhendricks/files/dev/apps	0	zsh	:
+pane	4	3	:Vim	0	:-	1	:/Users/jhendricks/files/dev/apps/root	0	zsh	:
+pane	4	3	:Vim	0	:-	2	:/Users/jhendricks/files/dev/apps/ha-api-gateway	1	Vim	:/usr/local/Cellar/macvim/8.0-126/MacVim.app/Contents/MacOS/Vim -g -v pom.xml
+pane	7	1	:zsh	0	:-	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	2	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	3	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	4	:/Users/jhendricks	0	zsh	:
+pane	7	2	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	7	3	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+window	0	1	1	:*	be9e,204x54,0,0,1
+window	4	1	1	:*	e92e,204x50,0,0{103x50,0,0,2,100x50,104,0,3}
+window	4	2	0	:	cb92,204x50,0,0{102x50,0,0[102x25,0,0,4,102x24,0,26,5],101x50,103,0[101x12,103,0,6,101x12,103,13,7,101x12,103,26,8,101x11,103,39,9]}
+window	4	3	0	:-	6eca,204x50,0,0[204x25,0,0,17,204x24,0,26,18]
+window	7	1	0	:-	52e4,204x54,0,0{102x54,0,0,10,50x54,103,0,11,50x54,154,0[50x27,154,0,12,50x26,154,28,13]}
+window	7	2	0	:	5f83,204x54,0,0,14
+window	7	3	1	:*	5f84,204x54,0,0,15
+window	8	1	1	:*	5f85,204x54,0,0,16
+state	4	8

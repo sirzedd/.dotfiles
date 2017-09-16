@@ -1,0 +1,36 @@
+pane	0	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	4	1	:node	0	:	1	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	0	node	:npm   
+pane	4	1	:node	0	:	2	:/Users/jhendricks/files/dev/apps/gitlab/testbed/jmx-viewer	0	zsh	:
+pane	4	1	:node	0	:	3	:/Users/jhendricks/files/dev/apps/komodo-libraries/api-documentation	1	zsh	:
+pane	4	2	:Vim	0	:-	1	:/Users/jhendricks/files/dev/apps/sm-core	1	zsh	:
+pane	4	2	:Vim	0	:-	2	:/Users/jhendricks/files/dev/apps/cmt	0	Vim	:/usr/local/Cellar/macvim/8.0-126/MacVim.app/Contents/MacOS/Vim -g -v pom.xml
+pane	4	2	:Vim	0	:-	3	:/Users/jhendricks/files/dev/apps/gitlab/sm-search	0	zsh	:
+pane	4	2	:Vim	0	:-	4	:/Users/jhendricks/files/dev/apps/gitlab/sm-source	0	Vim	:/usr/local/Cellar/macvim/8.0-126/MacVim.app/Contents/MacOS/Vim -g -v
+pane	4	2	:Vim	0	:-	5	:/Users/jhendricks/files/dev/apps/gitlab/ha-category-task-core	0	zsh	:
+pane	4	2	:Vim	0	:-	6	:/Users/jhendricks/files/dev/apps	0	zsh	:
+pane	4	3	:zsh	1	:*	1	:/Users/jhendricks/files/dev/apps/root	0	zsh	:
+pane	4	3	:zsh	1	:*	2	:/Users/jhendricks/files/dev/apps/sm-core	0	zsh	:
+pane	4	3	:zsh	1	:*	3	:/Users/jhendricks/files/dev/apps/sm-cache	0	zsh	:
+pane	4	3	:zsh	1	:*	4	:/Users/jhendricks/files/dev/apps/sm-recent-activity-server	0	zsh	:
+pane	4	3	:zsh	1	:*	5	:/Users/jhendricks/files/dev/apps/gitlab/best-match-client	0	zsh	:
+pane	4	3	:zsh	1	:*	6	:/Users/jhendricks/files/dev/apps/gitlab/sm-base-pom	0	zsh	:
+pane	4	3	:zsh	1	:*	7	:/Users/jhendricks/files/dev/apps/gitlab/sm-source-root	1	zsh	:
+pane	4	3	:zsh	1	:*	8	:/Users/jhendricks/files/dev/apps/sm-communication-server	0	zsh	:
+pane	4	4	:java	0	:	1	:/Users/jhendricks/files/dev/tools/pomexplorer/pom-explorer	1	java	:/usr/bin/java -jar pom-explorer/target/pom-explorer.jar 8002
+pane	7	1	:zsh	0	:-	1	:/Users/jhendricks	1	zsh	:
+pane	7	1	:zsh	0	:-	2	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	3	:/Users/jhendricks	0	zsh	:
+pane	7	1	:zsh	0	:-	4	:/Users/jhendricks	0	zsh	:
+pane	7	2	:zsh	0	:	1	:/Users/jhendricks	1	zsh	:
+pane	7	3	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+pane	8	1	:zsh	1	:*	1	:/Users/jhendricks	1	zsh	:
+window	0	1	1	:*	be9e,204x54,0,0,1
+window	4	1	0	:	deb8,238x64,0,0{120x64,0,0,2,117x64,121,0[117x32,121,0,3,117x31,121,33,19]}
+window	4	2	0	:-	7834,238x64,0,0{119x64,0,0[119x32,0,0,4,119x31,0,33,5],118x64,120,0[118x16,120,0,6,118x16,120,17,7,118x15,120,34,8,118x14,120,50,9]}
+window	4	3	1	:*	5030,238x64,0,0[238x32,0,0{119x32,0,0[119x16,0,0,17,119x15,0,17,23],118x32,120,0[118x16,120,0,22,118x15,120,17,24]},238x31,0,33{119x31,0,33[119x15,0,33,18,119x15,0,49,26],118x31,120,33[118x15,120,33,21,118x15,120,49,27]}]
+window	4	4	0	:	e1df,238x64,0,0,20
+window	7	1	0	:-	52e4,204x54,0,0{102x54,0,0,10,50x54,103,0,11,50x54,154,0[50x27,154,0,12,50x26,154,28,13]}
+window	7	2	0	:	5f83,204x54,0,0,14
+window	7	3	1	:*	5f84,204x54,0,0,15
+window	8	1	1	:*	5f85,204x54,0,0,16
+state	4	8
