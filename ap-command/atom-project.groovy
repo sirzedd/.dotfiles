@@ -13,8 +13,10 @@ def cli = new CliBuilder(usage: "ap -[hlvneardosfw] [commands]")
 
 cli.with {
     h  longOpt:  'help',             "Show usage information"
+    notes longOpt: 'notes',          "Current Notes"
     bm longOpt:  'bookmark',         "Edit bookmark file"
     l  longOpt:  'list',             "List project names"
+    todo longOpt: 'todo',            "Open todos "
     v  longOpt:  'view',             "View project details"
     np longOpt:  'new-project',      "Create new project"
     ep longOpt:  'edit-project',     "Edit project"
@@ -36,6 +38,9 @@ ap -w . -i /src/*.java -c mvn compile"""
 
 // def app = "code-insiders"
 def app = "code"
+def notes_file = "/Users/jhendricks/gdrive/work/documents/notes/current_notes.md"
+
+def todo_file = "/Users/jhendricks/gdrive/work/dev/todo/work.todo"
 
 def options = cli.parse(args)
 if(!options) {
@@ -57,6 +62,16 @@ if(options.w) {
   def (path, include, exclude, showOutput, command) = atomProject.separateArgs(arguments)
   println "watching $path including '$include' excluding '$exclude' showOutput '$showOutput' command '$command'"
   atomProject.watch(path, include, exclude, showOutput, command)
+}
+else if(options.todo) {
+     println "Opening todo"
+     def command = "$app $todo_file"
+     command.execute()
+}
+else if (options.notes) {
+     println "Opening notes"
+     def command = "$app $notes_file"
+     command.execute()
 }
 else if(options.bm) {
   println "Opening bookmark folder"
