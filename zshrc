@@ -1,131 +1,105 @@
 echo start
+
+source ~/.zsh_functions_aws
+
+# export JAVA_HOME=$(/Users/user/.sdkman/candidates/java/current)
+
+export MYSQL_HOST=127.0.0.1
+export MYSQL_USER=local 
+export MYSQL_PASSWD=local
+
+# export M2_HOME=/Users/user/.sdkman/candidates/maven/current
+export SIR_DEV=/Users/user/
+
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$SIR_DEV/bin:$MAVEN_HOME/bin:$SDKMAN_HOME/bin:$PATH
+
+
+
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="/Users/user/.oh-my-zsh"
 
-#use mvim instead of vim to get updates
-alias vim='mvim -v'
 
-alias watch='sh ~/bin/maven-watch.sh'
-alias run='sh ~/bin/run-spring.sh'
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
-#docker alias
-alias drm="docker rm"
-alias dps="docker ps"
 
-function dup() {
-  sh ~/bin/docker-compose.sh
-}
+alias tf='docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspace hashicorp/terraform:0.12.29 $@'
 
-alias ddn="docker-compose down"
-alias dbd="docker-compose build"
+# https://developer.apple.com/forums/thread/79056
+# ~/files/dev/tools/telnet
+alias telnet="docker run -it tools /usr/bin/telnet"
 
-function gitdiff() {
-  git diff --no-prefix -U1000 $1
+function reload() {
+	source ~/.zshrc
 }
 
-function docker-stop-remove() {
-  docker stop $1 && docker rm $1
-}
-function docker-ip() {
-  docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $1
+function gw() {
+    ./gradlew $@
 }
 
-function mvndcbuild() {
-  mvn clean package && docker-compose build
-}
-function mvndcup() {
-  mvn clean package && docker-compose build && docker-compose up -d
-}
-function dockerbuild() {
-  mvn clean package docker:build
-}
-function dexec() {
-  docker exec -it $1 /bin/sh -c "export TERM=xterm; exec sh"
-}
-function copyWar() {
-  cp **.war $CATALINA_HOME/webapps
-}
-function tomcatstart() {
-  sh $CATALINA_HOME/bin/startup.sh
-}
-function tomcatstop() {
-  sh $CATALINA_HOME/bin/shutdown.sh
+function dcdn-removeall() {
+  docker-compose down --rmi=all -v
 }
 
-function rumble() {
-  perl ~/bin/rumbleready
-}
+# function terraform() {
+#     docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspace hashicorp/terraform:0.12.29 terraform $@
+# }
 
 function ap() {
-    groovy ~/bin/bin/atom-project.groovy $@
+  if [[ $@ == *"-p"* ]]; then
+    MY_INPUT=$(</dev/stdin)
+    echo $MY_INPUT > /tmp/atom-project-tmp.diff
+    groovy ~/bin/atom-project.groovy -f /tmp/atom-project-tmp.diff
+  else
+    groovy ~/bin/atom-project.groovy $@
+  fi
 }
 
-function diffpipe() {
-  # compare the pipe tmp files
-  diff /tmp/atom-project-tmp /tmp/atom-project-tmp2 >> project-tmp.patch
-  groovy ~/bin/bin/atom-project.groovy -f /tmp/project-tmp.batch
+function training_db_tunnel() {
+  ssh -N -L 3307:myyesgo-training.cj80xk4fiykk.us-east-2.rds.amazonaws.com:3306 jhendricks@3.14.159.195
 }
 
-function pipe2() {
-  # find better way that doesn't need this
-   echo "" >> /tmp/atom-project-tmp2
-   MY_INPUT=$(</dev/stdin)
-   echo $MY_INPUT > /tmp/atom-project-tmp2
-   groovy ~/bin/bin/atom-project.groovy -n /tmp/atom-project-tmp2
+function cbc_db_tunnel() {
+    ssh -i ~/.ssh/id_rsa jhendricks@3.14.159.195 -L 9090:credit-bureau.cj80xk4fiykk.us-east-2.rds.amazonaws.com:5432
 }
 
-function pipe() {
-  # ability to pipe to multiple files instead of pipe2 and ability to open or not open app
-   echo "" >> /tmp/atom-project-tmp
-   MY_INPUT=$(</dev/stdin)
-   echo $MY_INPUT > /tmp/atom-project-tmp
-   groovy ~/bin/bin/atom-project.groovy -n /tmp/atom-project-tmp
-}
 
-function rumbler() {
- perl /apps/gitlab/dev-scripts/rumbler/rumbler $@
-}
+local knownhosts
+knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
 
-# Git alias
-function gitpullbranch () {
-  CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
-  git checkout $1
-  git pull
-  git checkout $CURRENT_BRANCH
-}
-function gitpullmaster () {
-  CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
-  git checkout master
-  git pull
-  git checkout $CURRENT_BRANCH
-}
-function newbox () {
-  docker run --name $1 --volumes-from=volume_container -it -v /var/run/docker.sock:/var/run/docker.sock -e BOX_NAME=$1 jhendricks/devbox
-}
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster2"
-#ZSH_THEME="agnoster"
 
-#keybinds
-bindkey "[C" forward-word
-bindkey "[D" backward-word
-
-
-DEFAULT_USER="jhendricks"
+DEFAULT_USER="user"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -146,36 +120,27 @@ DEFAULT_USER="jhendricks"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mvn brew sbt npm history node bower spring docker docker-compose)
-
-# User configuration
-export JAVA_HOME=$(/usr/libexec/java_home)
-export SIR_DEV=/Users/jhendricks/files/dev
-export M2_HOME=$SIR_DEV/maven
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export GRADLE_HOME=$SIR_DEV/gradle/current
-export ANT_HOME=$SIR_DEV/ant
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages/
-export MYSQL_HOME=/usr/local/mysql
-# export PYTHONPATH=/usr/local/Cellar/python3/3.4.3
-export CATALINA_HOME=/Users/jhendricks/files/dev/tools/tomcats/apache-tomcat-7.0.62
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$MYSQL_HOME/bin:$M2_HOME/bin:$SIR_DEV/bin:$ANT_HOME/bin:$GROOVY_HOME/bin:$GRADLE_HOME/bin:/Users/jhendricks/files/dev/scripts/bin:$PATH
-
-# export MANPATH="/usr/local/man:$MANPATH"
+plugins=(git mvn gradle brew npm history node spring docker docker-compose aws jfrog)
 
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim'
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -187,101 +152,8 @@ export EDITOR='vim'
 #   export EDITOR='mvim'
 # fi
 
-# Allow mvn to happen in another directory
-#function mvn-there() {
-#  DIR="$1"
-#  shift
-#  (cd $DIR; mvn "$@")
-#}
-#
-
-alias re='sudo $(fc -ln -1)'
-
-alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-
-#Call mvn in multiple repositories
-function mvn-there() {
-  groovy ~/files/dev/groovy-scripts/mvnthere.groovy $@
-}
-function gits() {
-  sh ~/files/dev/groovy-scripts/gitthere.sh $@
-}
-
-function luke() {
-  (cd ~/files/dev/tools/luke && ./luke.sh)
-}
-
-go() { cd /apps/$1; }
-    _go() { _files -W /apps -/; }
-    compdef _go go
-
-
-
-
-#David's script for quickly sshing into sandboxes
-function sb() {
-	if [ -z "$1" ] ; then
-	  echo "Usage: `basename $0` <host|number>"
-	  exit -1
-	fi
-
-	host=$1
-	if [ "$host" = "${host//[^0-9]/}" ] ; then
-	 host=dsandpr$(printf "%03d" $host)
-	fi
-
-	ssh sandbox@$host
-}
-
-function diff-branch () {
-	sh ~/files/dev/scripts/git-diff-branch.sh $@
-}
-function dt () {
-	sh ~/files/dev/scripts/git-difftool-branch.sh $@
-	#groovy ~/files/dev/groovy-scripts/git-diff-branch.sh $@
-}
-function reload() {
-	source ~/.zshrc
-}
-
-local knownhosts
-knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
-
-rg()
-{
-    filepat="$1"
-    pat="$2"
-    shift 2
-    grep -Er --include=$filepat $pat ${@:-.}
-}
-
-#Instead of doing cd ~/Somefolder/Anotherfolder/project/, you can just do z proj
-. `brew --prefix`/etc/profile.d/z.sh
-
-
-function findgrep-atom()
-{
-filepat="$1"
-pat="$2"
-find . -name $filepat -type f -exec grep -nl $pat {} \; | open -fa /Applications/Atom.app
-}
-function findgrep-copy()
-{
-filepat="$1"
-pat="$2"
-find . -name $filepat -type f -exec grep -nl $pat {} \; | pbcopy
-}
-# In Zsh, 'noglob' turns off globing.
-# (e.g, "noglob echo *" outputs "*")
-alias rg='noglob rg'
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -292,11 +164,15 @@ alias rg='noglob rg'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Add autocompletion for docker
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!! 
+# export SDKMAN_DIR="/home/USER/.sdkman" [[ -s "/home/USER/.sdkman/bin/sdkman-init.sh" ]] && source "/home/USER/.sdkman/bin/sdkman-init.sh"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/user/.sdkman"
+[[ -s "/Users/user/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/user/.sdkman/bin/sdkman-init.sh"
 
-source ~/.xsh
-
+echo loaded
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-echo end
+
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
