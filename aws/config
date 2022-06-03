@@ -1,0 +1,22 @@
+[default]
+aws_access_key_id = 
+aws_secret_access_key = 
+
+[dev_role]
+role_arn = 
+source_profile = 
+mfa_serial = 
+region = us-west-2[local]
+aws_access_key_id = 
+aws_secret_access_key = 
+
+[dev]
+role_arn = 
+mfa_serial = 
+region = us-west-2
+
+
+[local]
+region = us-east-1
+aws_access_key_id = 
+aws_secret_access_key = 
