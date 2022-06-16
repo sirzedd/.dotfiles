@@ -1,0 +1,10 @@
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias leetcode-kt='idea ~/files/self/leetcode-kt/'
+alias leetcode='idea ~/files/self/leetcode/'
+
+alias tf='docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspace hashicorp/terraform:0.12.29 $@'
+
+# https://developer.apple.com/forums/thread/79056
+alias telnet="docker run -it tools /usr/bin/telnet"
+

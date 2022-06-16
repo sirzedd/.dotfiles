@@ -1,0 +1,4 @@
+function dcdn-removeall() {
+  docker-compose down --rmi=all -v
+}
+

@@ -1,0 +1,14 @@
+function exportTerraformEnvironments() {
+    export VAULT_ADDR=
+    export TF_VAR_vault_login_password=
+}
+
+# function terraform() {
+#     docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspace hashicorp/terraform:0.12.29 terraform $@
+# }
+
+function tg-dev() {
+  exportTerraformEnvironments
+	readonly dev_full_arn="arn:aws:iam::<AWS_ENV_ID>:role/<ROLE_NAME>"
+	terragrunt $@ --terragrunt-iam-role $dev_full_arn
+}

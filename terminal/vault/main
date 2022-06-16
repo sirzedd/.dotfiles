@@ -1,0 +1,5 @@
+# Vault locally, used brew install vault
+# start server vault server --dev --dev-root-token-id="00000000-0000-0000-0000-000000000000"
+# insert secret vault kv put secret/<service name>/local server.port=3000
+export VAULT_TOKEN="00000000-0000-0000-0000-000000000000"
+export VAULT_ADDR="http://127.0.0.1:8200"

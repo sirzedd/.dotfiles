@@ -1,0 +1,238 @@
+#!/bin/bash
+# A script that makes it easier to use the AWS CLI with MFA enabled. It fetches your temporary AWS STS credentials and
+# writes text to stdout that exports those credentials as the proper environment variables for use with the AWS CLI.
+
+set -e
+
+readonly SCRIPT_NAME=$(basename "$0")
+readonly EMPTY_VAL="__EMPTY__"
+readonly DEFAULT_MFA_TOKEN_DURATION_SECONDS=43200 # 12 hours
+readonly DEFAULT_ROLE_DURATION_SECONDS=43200 # 12 hours
+
+function print_usage {
+  echo
+  echo "Usage: aws-auth [OPTIONS]"
+  echo
+  echo "A script that makes it easier to use the AWS CLI with MFA and/or cross-account IAM Roles. It fetches your"
+  echo "temporary AWS STS credentials and writes text to stdout that exports those credentials as the proper environment"
+  echo "variables for use with the AWS CLI."
+  echo
+  echo "Options:"
+  echo
+  echo -e "  --serial-number\t\tThe ARN of your MFA device. You can find this in the IAM console for your IAM user."
+  echo -e "  --token-code\t\t\tThe current token on your MFA device. Open up your MFA app to get it."
+  echo -e "  --role-arn\t\t\tThe ARN of an IAM role to assume. Optional."
+  echo -e "  --mfa-duration-seconds\tThe MFA token will expire after this many seconds. Max: 36 hours (129,600 seconds). Default: $DEFAULT_MFA_TOKEN_DURATION_SECONDS. Only used if --role-arn is not specified."
+  echo -e "  --role-duration-seconds\tThe IAM role will expire after this many seconds. Max: 12 hours (43,200 seconds). Default: $DEFAULT_ROLE_DURATION_SECONDS. Only used if --role-arn is specified."
+  echo -e "  --help\t\t\tShow this help text and exit."
+  echo
+  echo "Examples:"
+  echo
+  echo "  eval \"\$(aws-auth --serial-number arn:aws:iam::123456789011:mfa/jondoe --token-code 123456)\""
+  echo "  eval \"\$(aws-auth --role-arn arn:aws:iam::123456789011:role/rolename --role-duration-seconds 43200)\""
+  echo "  eval \"\$(aws-auth --role-arn arn:aws:iam::123456789011:role/rolename --serial-number arn:aws:iam::123456789011:mfa/jondoe --token-code 123456)"
+}
+
+function log {
+  local -r level="$1"
+  local -r message="$2"
+  local -r timestamp="$(date +"%Y-%m-%d %H:%M:%S")"
+  >&2 echo -e "${timestamp} [${level}] [$SCRIPT_NAME] ${message}"
+}
+
+function log_info {
+  local -r message="$1"
+  log "INFO" "$message"
+}
+
+function log_warn {
+  local -r message="$1"
+  log "WARN" "$message"
+}
+
+function log_error {
+  local -r message="$1"
+  log "ERROR" "$message"
+}
+
+function is_empty {
+  local -r arg="$1"
+
+  if [[ -z "$arg" ]] || [[ "$arg" == "$EMPTY_VAL" ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+function assert_not_empty {
+  local -r arg_name="$1"
+  local -r arg_value="$2"
+
+  if [[ $(is_empty "$arg_value") == "true" ]]; then
+    log_error "The value for '$arg_name' cannot be empty"
+    print_usage
+    exit 1
+  fi
+}
+
+function assert_at_least_one_not_empty {
+  local -ar args=("$@")
+  local all_args_empty="true"
+
+  for arg in "${args[@]}"; do
+    if [[ "$(is_empty "$arg")" == "false" ]]; then
+      return
+    fi
+  done
+
+  log_error "At least one of the options must be non-empty."
+  print_usage
+  exit 1
+}
+
+# Assert that all the given args are empty ("", "", "") or non-empty ("a", "b", "c") but not a mix ("a", "", "c")
+function assert_all_empty_or_all_nonempty {
+  local err_msg="$1"
+  shift 1;
+  local -ar args=("$@")
+  local all_args_empty="true"
+  local all_args_not_empty="true"
+
+  for arg in "${args[@]}"; do
+    if [[ "$(is_empty "$arg")" == "false" ]]; then
+      all_args_empty="false"
+    fi
+  done
+
+  for arg in "${args[@]}"; do
+    if [[ "$(is_empty "$arg")" == "true" ]]; then
+      all_args_not_empty="false"
+    fi
+  done
+
+  if [[ "$all_args_empty" == "false" ]] && [[ "$all_args_not_empty" == "false" ]]; then
+    log_error "$err_msg"
+    print_usage
+    exit 1
+  fi
+}
+
+function assert_is_installed {
+  local -r name="$1"
+
+  if [[ ! "$(command -v "$name")" ]]; then
+    log_error "The binary '$name' is required by this script but is not installed or in the system's PATH."
+    exit 1
+  fi
+}
+
+function get_session_token {
+  local serial_number="$EMPTY_VAL"
+  local token_code="$EMPTY_VAL"
+  local role_arn="$EMPTY_VAL"
+  local mfa_token_duration_seconds="$DEFAULT_MFA_TOKEN_DURATION_SECONDS"
+  local role_duration_seconds="$DEFAULT_ROLE_DURATION_SECONDS"
+
+  while [[ $# -gt 0 ]]; do
+    local key="$1"
+
+    case "$key" in
+      --serial-number)
+        serial_number="$2"
+        shift
+        ;;
+      --token-code)
+        token_code="$2"
+        shift
+        ;;
+      --role-arn)
+        role_arn="$2"
+        shift
+        ;;
+      --mfa-duration-seconds)
+        assert_not_empty "$key" "$2"
+        mfa_token_duration_seconds="$2"
+        shift
+        ;;
+      --role-duration-seconds)
+        assert_not_empty "$key" "$2"
+        role_duration_seconds="$2"
+        shift
+        ;;
+      --help)
+        print_usage
+        exit
+        ;;
+      *)
+        log_error "Unrecognized argument: $key"
+        print_usage
+        exit 1
+        ;;
+    esac
+
+    shift
+  done
+
+  assert_is_installed "aws"
+  assert_is_installed "jq"
+
+  assert_at_least_one_not_empty "$serial_number" "$token_code" "$role_arn"
+  assert_all_empty_or_all_nonempty "You specified just one of --serial-number and --token code. Either specify both or none of these options." "$serial_number" "$token_code"
+
+  local use_mfa="true"
+  local assume_role="true"
+
+  if [[ "$(is_empty "$serial_number")" == "true" ]] && [[ "$(is_empty "$token_code")" == "true" ]]; then
+    use_mfa="false"
+  fi
+
+  if [[ "$(is_empty "$role_arn")" == "true" ]]; then
+    assume_role="false"
+  fi
+
+  local -a awscli_args=(--output json)
+  if [[ "$assume_role" == "true" ]]; then
+    awscli_args+=(--role-arn "$role_arn" --role-session-name "$USER")
+  fi
+  if [[ "$use_mfa" == "true" ]]; then
+    awscli_args+=(--serial-number "$serial_number" --token-code "$token_code")
+  fi
+
+  local aws_response
+  if [[ "$use_mfa" == "true" && "$assume_role" == "true" ]]; then
+    log_info "Assuming role $role_arn, using MFA device $serial_number. These creds will expire after $role_duration_seconds seconds."
+    aws_response="$(AWS_SESSION_TOKEN="" aws sts assume-role "${awscli_args[@]}" --duration-seconds "$role_duration_seconds")"
+  elif [[ "$assume_role" == "true" ]]; then
+    log_info "Assuming role $role_arn. These creds will expire after $role_duration_seconds seconds."
+    aws_response="$(aws sts assume-role "${awscli_args[@]}" --duration-seconds "$role_duration_seconds")"
+  elif [[ "$use_mfa" == "true" ]]; then
+    log_info "Getting temporary credentials for MFA device $serial_number. These creds will expire after $mfa_token_duration_seconds seconds."
+    aws_response="$(AWS_SESSION_TOKEN="" aws sts get-session-token "${awscli_args[@]}" --duration-seconds "$mfa_token_duration_seconds")"
+  else
+    log_error "Something went wrong that should not have happened. Contact Gruntwork support (support@gruntwork.io) with the following message:"
+    log_error "aws-auth reached use_mfa = false and assume_role = false\nopts is nil without error for args %v"
+    exit 1
+  fi
+
+  local access_key_id
+  access_key_id=$(echo "$aws_response" | jq -r '.Credentials.AccessKeyId')
+
+  local secret_access_key
+  secret_access_key=$(echo "$aws_response" | jq -r '.Credentials.SecretAccessKey')
+
+  local session_token
+  session_token=$(echo "$aws_response" | jq -r '.Credentials.SessionToken')
+
+  local expiration
+  expiration=$(echo "$aws_response" | jq -r '.Credentials.Expiration')
+
+  echo "export AWS_ACCESS_KEY_ID='$access_key_id'"
+  echo "export AWS_SECRET_ACCESS_KEY='$secret_access_key'"
+  echo "export AWS_SESSION_TOKEN='$session_token'"
+  echo "export AWS_SESSION_EXPIRATION='$expiration'"
+
+  log_info "Success!"
+}
+
+get_session_token "$@"
