@@ -1,0 +1,11 @@
+export MYSQL_HOST=localhost
+export MYSQL_USER=local 
+export MYSQL_PASSWD=local
+export MYSQL_ROOT_PASSWORD=local
+export MYSQL_DATABASE=myyesgo
+
+# export M2_HOME=/Users/jhendricks/.sdkman/candidates/maven/current
+export SIR_DEV=/Users/jhendricks
+
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/python/libexec/bin:~/Library/Python/3.8/bin:$SIR_DEV/bin:$MAVEN_HOME/bin:$SDKMAN_HOME/bin
+. "$HOME/.cargo/env"

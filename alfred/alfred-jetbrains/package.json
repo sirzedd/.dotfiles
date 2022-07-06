@@ -1,0 +1,84 @@
+{
+  "_from": "@bchatard/alfred-jetbrains",
+  "_id": "@bchatard/alfred-jetbrains@1.7.1",
+  "_inBundle": false,
+  "_integrity": "sha512-6+ZanGWj5XLRS2BkqT7Nd9lpmUEzFxPs7N5G2/CPWaP0oQeRf6om+fZJEdnHe/dtYYQor2dD7oqc8/XazOcaCQ==",
+  "_location": "/@bchatard/alfred-jetbrains",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@bchatard/alfred-jetbrains",
+    "name": "@bchatard/alfred-jetbrains",
+    "escapedName": "@bchatard%2falfred-jetbrains",
+    "scope": "@bchatard",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/@bchatard/alfred-jetbrains/-/alfred-jetbrains-1.7.1.tgz",
+  "_shasum": "5724295e1ba1aefaa0b6bcb0c924e5b9cfb81721",
+  "_spec": "@bchatard/alfred-jetbrains",
+  "_where": "/Users/jhendricks/apps/application-messaging-service",
+  "author": {
+    "name": "bchatard"
+  },
+  "bugs": {
+    "url": "https://github.com/bchatard/alfred-jetbrains/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "alfy": "^0.12.1",
+    "execa": "^6.0.0",
+    "fast-xml-parser": "^3.21.1",
+    "fuse.js": "^3.4.4",
+    "which": "^2.0.1"
+  },
+  "deprecated": false,
+  "description": "Alfred3 workflow to easily open your projects with your favorite JetBrains product.",
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "prettier": "^2.5.0",
+    "pretty-quick": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "exports": "./src/index.js",
+  "homepage": "https://github.com/bchatard/alfred-jetbrains#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "keywords": [
+    "jebrains",
+    "alfred",
+    "workflow",
+    "alfred-workflow",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "@bchatard/alfred-jetbrains",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bchatard/alfred-jetbrains.git"
+  },
+  "scripts": {
+    "postinstall": "alfy-init",
+    "prepare": "husky install",
+    "preuninstall": "alfy-cleanup",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "type": "module",
+  "version": "1.7.1",
+  "volta": {
+    "node": "14.18.2"
+  }
+}
