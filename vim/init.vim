@@ -1,16 +1,28 @@
 " to pull from ~/.vimrc
-" set runtimepath^=~/.vim runtimepath+=~/.vim/after
-" let &packpath=&runtimepath
-" source ~/.vimrc
+"set runtimepath^=~/.vim runtimepath+=~/.vim/after
+"let &packpath=&runtimepath
+"source ~/.vimrc
 
-" Reference .dotfiles https://github.com/ThePrimeagen/.dotfiles
+" reference .dotfiles https://github.com/theprimeagen/.dotfiles
 
-" Tab options
-" Can find options with :h tabstop
-set shiftwidth=4
+" tab options
+
+" when pressing tab, insert 2 spaces
 set expandtab
 set smartindent
 
+" show exiting tab with 2 spaces width
+set tabstop=2
+
+" when indenting with '>' use 2 spaces widths
+set shiftwidth=2
+
+"sets number of colums for a TAB
+set softtabstop=2
+
+set backspace=2 " more powerful backspacing
+
+" 
 set guicursor=
 set relativenumber
 set nu
@@ -20,6 +32,7 @@ set nohlsearch
 
 " keep everything open, faster swapping between stuff 
 set hidden
+
 " turn off bells
 set noerrorbells
 
@@ -43,11 +56,17 @@ set colorcolumn=100
 " Column for errors
 set signcolumn=yes
 
+" don't display welcome
+set shortmess+=I
+
+set history=700
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
 " plugins, vim-plug https://github.com/junegunn/vim-plug
-
+" ---Plugins ---
+"
 call plug#begin('~/.dotfile/vim/plugged')
 
 " Plug 'nvim-telescope/telescope.nvim'
@@ -81,6 +100,29 @@ Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+
+" Seamless navigate vim and tmux splits
+Plug 'christoomey/vim-tmux-navigator'
+
+" TODO Commenting this out, needs java 11 to work properly 
+" LSP Client and Autoinstaller
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'williamboman/nvim-lsp-installer'
+" Plug 'mfussenegger/nvim-jdtls'
+
+" Plug 'VonHeikemen/lsp-zero.nvim'
+
+" Auto Complete
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+
+
+
+
 " Plugins to look into
 "NEOVIM LSP
 "Telescope
@@ -91,7 +133,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Initialize plugin system
 call plug#end()
-
 
 colorscheme gruvbox
 "colorscheme desert
@@ -126,4 +167,9 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+" Exit insert mode by typing kj rather than esc
+" http://www.guyrutenberg.com/2013/09/23/quickly-exiting-insert-mode-in-vim/
+:inoremap kj <ESC>
+" exit even if capital if in caps lock
+:inoremap KJ <ESC>
 
