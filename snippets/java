@@ -1,0 +1,13 @@
+package {{package_name}}
+
+
+public class {{class_name}} {
+
+  @Test
+  public void test() {
+
+
+  }
+
+
+}
