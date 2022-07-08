@@ -1,0 +1,75 @@
+# Fix issue with tmux having delete do space instead
+TERM=xterm
+
+DISABLE_AUTO_TITLE="true"
+ZSH_DISABLE_COMPFIX="true"
+
+# vi editing mode in bash and in iTerm2
+set -o vi
+
+# Personal Source Dotfile Folders
+sourceFolder "alias"
+# sourceFolder "aws"
+sourceFolder "docker"
+sourceFolder "gradle"
+# sourceFolder "mysql"
+sourceFolder "terraform"
+# sourceFolder "vault"
+sourceFolder "zsh"
+
+# Add Dotfiles bin to path
+addToPathFront $DOTFILES/bin/.local/bin
+
+# Functions
+function ap() {
+  if [[ $@ == *"-p"* ]]; then
+    MY_INPUT=$(</dev/stdin)
+    echo $MY_INPUT > /tmp/atom-project-tmp.diff
+    groovy ~/bin/atom-project.groovy -f /tmp/atom-project-tmp.diff
+  else
+    groovy ~/bin/atom-project.groovy $@
+  fi
+}
+
+function tmux-resurrect-reset-last() {
+    cd ~/.tmux/resurrect && \
+        ln -f -s $(/bin/ls -t tmux_resurrect_*.txt | head -n 1) last && \
+        /bin/ls -l last
+}
+
+function zcf() {
+    vim ~/.dotfiles/zsh/.zsh_profile
+}
+
+function tcf() {
+    vim ~/.dotfiles/tmux/.tmux.conf
+}
+
+function vcf() {
+    vim ~/.dotfiles/vim/init.vim
+}
+
+# https://thevaluable.dev/zsh-completion-guide-examples/
+# How to populate known_hosts https://www.techrepublic.com/article/how-to-easily-add-an-ssh-fingerprint-to-your-knownhosts-file-in-linux/
+# command is `ssh-keyscan -H 192.168.1.162 >> ~/.ssh/known_hosts`
+local knownhosts
+knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
+
+# https://github.com/zsh-users/zsh-completions
+
+source <(git-town completions zsh)
+# source <(completions zsh)
+
+# Unknown what this is for. Can enable iterm2 shell integration from iterm2, maybe it added it?
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+autoload -U +X bashcompinit && bashcompinit
+
+# I believe this comes from tfswitch for switching terraform and making sure to pick the right version?
+#complete -o nospace -C /usr/local/bin/terraform terraform
+# I might need this to point to the right terraform file from tfswitch
+#complete -o nospace -C $HOME/bin/terraform terraform
+
+# Has to be last
+#sourceFolder "sdkman"
