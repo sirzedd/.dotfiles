@@ -8,3 +8,7 @@ alias tf='docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspac
 # https://developer.apple.com/forums/thread/79056
 alias telnet="docker run -it tools /usr/bin/telnet"
 
+
+
+
+alias fs="find ~/.dotfiles/snippets -type f | fzf --preview 'cat {}' | xargs -I '{}' cat {} | pbcopy"

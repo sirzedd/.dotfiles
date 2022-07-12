@@ -61,10 +61,21 @@ zstyle ':completion:*:(ssh|scp|sftp):*' hosts $knownhosts
 source <(git-town completions zsh)
 # source <(completions zsh)
 
+
+# Rust autocompletion
+# Ran this first `rustup completions zsh cargo > ~/.zsh/completions/_cargo`
+fpath+=~/.zsh/completions
+autoload -U compinit && compinit
+
+
 # Unknown what this is for. Can enable iterm2 shell integration from iterm2, maybe it added it?
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 autoload -U +X bashcompinit && bashcompinit
+
+# aws command completer.  Installs when installing aws command
+complete -C '/usr/local/bin/aws_completer' aws
+
 
 # I believe this comes from tfswitch for switching terraform and making sure to pick the right version?
 #complete -o nospace -C /usr/local/bin/terraform terraform
