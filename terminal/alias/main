@@ -10,5 +10,17 @@ alias telnet="docker run -it tools /usr/bin/telnet"
 
 
 
+# Old snippet finder
+#alias fs="find ~/.dotfiles/snippets -type f | fzf --preview 'cat {}' | xargs -I '{}' cat {} | pbcopy"
 
-alias fs="find ~/.dotfiles/snippets -type f | fzf --preview 'cat {}' | xargs -I '{}' cat {} | pbcopy"
+
+alias fs=". tmux-snippets.sh && rusty-snippets"
+
+alias cat="bat"
+
+alias hist="history | cut -c 8- | fzf | pbcopy"
+
+
+alias ls="exa -a"
+alias ll="exa -abghl"
+

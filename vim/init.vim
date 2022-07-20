@@ -121,6 +121,9 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
 
+" ctrlp https://github.com/ctrlpvim/ctrlp.vim
+Plug 'ctrlpvim/ctrlp.vim'
+
 
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
@@ -159,6 +162,35 @@ Plug 'nvim-lua/plenary.nvim'
 
 " Initialize plugin system
 call plug#end()
+
+" commands
+
+" command! Snip execute '. tmux-snippets.sh && rustysnippets'
+
+" / commands
+
+" ctrlp
+
+  " Control working directory 
+  let g:ctrlp_working_path_mode = 'ra'
+
+  " Ignore .gitignore
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+  " let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+
+  " Ignore
+  let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" end ctrlp
+
+nnoremap <leader><leader> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
+
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " START RUST LSP must be after plug#end
 " Set completeopt to have a better completion experience 

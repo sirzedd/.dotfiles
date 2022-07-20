@@ -3,7 +3,8 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/apps -mindepth 1 -maxdepth 1 -type d | fzf)
+   # using FD to get color, pass to fzf which handles color
+    selected=$(fd -t=d -d=1 --color always . ~/apps | fzf --ansi)
 fi
 
 if [[ -z $selected ]]; then

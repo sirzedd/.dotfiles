@@ -18,3 +18,5 @@
 * alfred 4 (Quick Commands)
 * karabiner (Keyboard Shortcuts)
 
+
+
