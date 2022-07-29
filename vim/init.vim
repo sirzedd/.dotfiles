@@ -151,6 +151,8 @@ Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 
 
+Plug 'tpope/vim-surround'
+
 
 " Plugins to look into
 "NEOVIM LSP
@@ -187,11 +189,6 @@ call plug#end()
   \ }
 
 " end ctrlp
-
-nnoremap <leader><leader> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
-
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-
 " START RUST LSP must be after plug#end
 " Set completeopt to have a better completion experience 
 " :help completeopt
@@ -329,6 +326,15 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
+
+nmap <CR> o<Esc>k
+
+" Interactive replace all, one by one
+nnoremap <leader><leader> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
+
+" replace all with no mercy 🤯
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 
 " Exit insert mode by typing kj rather than esc
 " http://www.guyrutenberg.com/2013/09/23/quickly-exiting-insert-mode-in-vim/
