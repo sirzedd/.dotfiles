@@ -2,7 +2,17 @@
 
 ## Description
 
-I'm trying to get better with VIM to help increase my speed of getting work done by no needing a mouse.  Not sure I'm used to it enough and I was better at it at demandware.  But this is my Vim for YSG.
+I used to be a vim guru at demandware but many years of not using it has made me slow.  I'm slowing updating this buliding a new vim mojo.  I'm using NeoVim
 
-The plugins are from my time at demandware.  I wanted to remember what I had on vim when I was there.  The .vimrc is my usage from YSG.  It's pretty basic.
+## Usage
+
+I source the `.dotfiles/vim/init.vim` file from my `~/.config/nvim/init.vim` like this
+
+```
+source ~/.dotfiles/vim/init.vim
+```
+
+My goal is to keep any work specific vim config (if there is any) in the `~/.config/nvim/init.vim` so I don't check anything into this repository. 
+
+After starting vim I need to run `:PlugInstall` to install all those tasty plugins 🤤
 
