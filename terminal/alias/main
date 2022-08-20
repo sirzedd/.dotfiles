@@ -9,18 +9,27 @@ alias tf='docker run --rm -it --name terraform -v $(pwd):/workspace -w /workspac
 alias telnet="docker run -it tools /usr/bin/telnet"
 
 
-
 # Old snippet finder
 #alias fs="find ~/.dotfiles/snippets -type f | fzf --preview 'cat {}' | xargs -I '{}' cat {} | pbcopy"
 
 
 alias fs=". tmux-snippets.sh && rusty-snippets"
 
-alias cat="bat"
+if [ -x "$(command -v bat)" ]; then
+  alias cat="bat"
+else 
+  echo "bat not installed skipping alias"
+fi
 
 alias hist="history | cut -c 8- | fzf | pbcopy"
 
+if [ -x "$(command -v exa)" ]; then
+  echo "exa installed, changing ls alias"
+  alias ls="exa -a"
+  alias ll="exa -abghl"
+else 
+  echo "exa not installed skipping aliases"
+fi
 
-alias ls="exa -a"
-alias ll="exa -abghl"
+
 
