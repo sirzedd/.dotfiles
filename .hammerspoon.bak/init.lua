@@ -85,9 +85,7 @@ local keys = {
   ".",
   "return",
   "tab",
-  "space",
-  "LEFT",
-  "RIGHT"
+  "space"
 }
 
 
@@ -140,15 +138,6 @@ hyper:bind({}, ';', nil, pressedA, releasedA)
 --   end
 
   hyper:bind({}, "shift", function() hs.hid.capslock.toggle() end)
-
--- -- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
--- --   send ESCAPE if no other keys are pressed.
-releasedF18 = function()
-  k:exit()
-  if not k.triggered then
-    hs.eventtap.keyStroke({}, 'ESCAPE')
-  end
-end
 
 
   hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reload_config):start()

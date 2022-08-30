@@ -15,10 +15,10 @@ end
 -- send ESCAPE if no other keys are pressed.
 local function exitHyperMode()
   hyper:exit()
-  if not hyper.triggered then
-    -- hs.alert.show("Escape")
-    hs.eventtap.keyStroke({}, 'ESCAPE')
-  end
+  -- if not hyper.triggered then
+  --   hs.alert.show("Escape")
+  --   hs.eventtap.keyStroke({}, 'ESCAPE')
+  -- end
 end
 
 

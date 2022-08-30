@@ -20,6 +20,7 @@ sourceFolder "zsh"
 # Add Dotfiles bin to path
 addToPathFront $DOTFILES/bin/.local/bin
 
+
 # Functions
 function ap() {
   if [[ $@ == *"-p"* ]]; then
@@ -47,6 +48,14 @@ function tcf() {
 
 function vcf() {
     vim ~/.dotfiles/vim/init.vim
+}
+
+
+# https://github.com/watchexec/watchexec brew install watchexec
+# This will watch for any java file changes and run mvnd compile which is the maven daemon handling cache compiles, gradle has one too
+# However this doesn't look like it works property, the daemon keeps dying with the process that runs
+function watch-java() {
+  watchexec -e java mvnd compile
 }
 
 # https://thevaluable.dev/zsh-completion-guide-examples/
