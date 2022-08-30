@@ -19,6 +19,19 @@ I tried to split up all the sources I use in terminal to keep them organized.  I
 Contains some of personal nvim configs
 
 
+## Remapping Caps Lock to F18
+
+Without Karabiner I had to remap keys like this.  
+
+https://hidutil-generator.netlify.app/
+
+https://rakhesh.com/mac/using-hidutil-to-map-macos-keyboard-keys/
+
+Use hidutil or build a Launch Agent
+
+
+
+
 ## .dotfiles to follow for insperation 🤩
 [ThePrimeagen](https://github.com/ThePrimeagen/.dotfiles/tree/master/zsh)
 

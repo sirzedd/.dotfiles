@@ -11,6 +11,9 @@
 set expandtab
 set smartindent
 
+" Ignore case when using /
+set ignorecase
+
 " show exiting tab with 2 spaces width
 set tabstop=2
 
@@ -35,6 +38,7 @@ set hidden
 
 " turn off bells
 set noerrorbells
+set visualbell
 
 " stop wrapping text
 set nowrap
@@ -331,10 +335,12 @@ nmap <CR> o<Esc>k
 
 " Interactive replace all, one by one
 nnoremap <leader><leader> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
+":nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " replace all with no mercy 🤯
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
+nnoremap <Leader>r :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
 
 " Exit insert mode by typing kj rather than esc
 " http://www.guyrutenberg.com/2013/09/23/quickly-exiting-insert-mode-in-vim/
