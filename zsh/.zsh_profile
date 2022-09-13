@@ -11,6 +11,7 @@ set -o vi
 sourceFolder "alias"
 # sourceFolder "aws"
 sourceFolder "docker"
+sourceFolder "git"
 sourceFolder "gradle"
 # sourceFolder "mysql"
 sourceFolder "terraform"
@@ -48,6 +49,12 @@ function tcf() {
 
 function vcf() {
     vim ~/.dotfiles/vim/init.vim
+}
+
+
+function gitdiff() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
 
 

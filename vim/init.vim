@@ -327,9 +327,11 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Faster copy to clipboard and pasting from clipboard
 set clipboard=unnamed
 noremap <Leader>y "*y
-noremap <Leader>p "*p
+"I don't use this more and the other one allows me to paste multiple times  noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
+
+noremap <leader>p "_dP
 
 nmap <CR> o<Esc>k
 
