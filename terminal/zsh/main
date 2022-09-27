@@ -1,3 +1,4 @@
 function reload() {
-	source ~/.zshrc
+	#source ~/.zshrc
+  exec zsh
 }

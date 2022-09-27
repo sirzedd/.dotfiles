@@ -339,6 +339,10 @@ nmap <CR> o<Esc>k
 nnoremap <leader><leader> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
 ":nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
+" Very nice replacment using ctrl+r while visually selected
+" Remove the g in gc to have it done without mercy
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " replace all with no mercy 🤯
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 

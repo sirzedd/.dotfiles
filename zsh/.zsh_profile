@@ -57,6 +57,11 @@ function gitdiff() {
   git diff $@ --name-only | fzf -m --ansi --preview $preview
 }
 
+# Function for testing shell load time
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
 
 # https://github.com/watchexec/watchexec brew install watchexec
 # This will watch for any java file changes and run mvnd compile which is the maven daemon handling cache compiles, gradle has one too
