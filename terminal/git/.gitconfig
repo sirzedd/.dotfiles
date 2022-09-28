@@ -1,0 +1,43 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+name = Joshua Hendricks (work)
+email = hendricksjc@gmail.com
+[alias]
+#	append = town append
+#	hack = town hack
+#	kill = town kill
+#	new-pull-request = town new-pull-request
+#	prepend = town prepend
+#	prune-branches = town prune-branches
+#	rename-branch = town rename-branch
+#	repo = town repo
+#	ship = town ship
+#	sync = town sync
+
+  ls = log --oneline
+  #fdiff = "! preview='git diff $@ --color=always -- {-1}' && git diff $@ --name-only | fzf -m --ansi --preview $preview "
+  #fdiff = "! gitdiff"
+  #gra =   "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+  #la = "!git config -l | grep alias | cut -c 7-"
+  cod = checkout  develop
+  fb = !zsh -c fbr
+  fadd = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+  fco = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git checkout"
+  frestore = "!git diff --name-only --cached | fzf --print0 -m | xargs -0 -t -o git restore --staged"
+  fmerge = "!fmerge"
+  fdiff = "!fdiff"
+  fstash = "!fstash"  
+  echo = !echo $PATH
+#  co = checkout
+#  cob = checkout -b
+#  del = branch -D
+#  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+#  res = !git reset --hard
+#  done = !git push origin HEAD
+#  undo = reset HEAD~1 --mixed
+  
+[core]
+	editor = /Users/jhendri2/files/dev/tools/homebrew/bin/nvim
+[branch]
+#	autoSetupMerge = off
