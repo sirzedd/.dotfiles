@@ -158,6 +158,10 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-surround'
 
 
+" Nice plugins for rest, can't seem to get them to work
+" Plug 'nicwest/vim-http'
+" Plug 'aquach/vim-http-client'
+
 " Plugins to look into
 "NEOVIM LSP
 "Telescope

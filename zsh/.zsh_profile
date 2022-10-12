@@ -63,6 +63,27 @@ timezsh() {
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
+##### nvm (node version manager) #####
+# placeholder nvm shell function
+# On first use, it will set nvm up properly which will replace the `nvm`
+# shell function with the real one
+#nvm() {
+#  if [[ -d '/usr/local/opt/nvm' ]]; then
+#    NVM_DIR="/usr/local/opt/nvm"
+#    export NVM_DIR
+#    # shellcheck disable=SC1090
+#    source "${NVM_DIR}/nvm.sh"
+#    if [[ -e ~/.nvm/alias/default ]]; then
+#      PATH="${PATH}:${HOME}.nvm/versions/node/$(cat ~/.nvm/alias/default)/bin"
+#    fi
+#    # invoke the real nvm function now
+#    nvm "$@"
+#  else
+#    echo "nvm is not installed" >&2
+#    return 1
+#  fi
+#}
+
 # https://github.com/watchexec/watchexec brew install watchexec
 # This will watch for any java file changes and run mvnd compile which is the maven daemon handling cache compiles, gradle has one too
 # However this doesn't look like it works property, the daemon keeps dying with the process that runs

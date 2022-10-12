@@ -35,3 +35,6 @@ Use hidutil or build a Launch Agent
 ## .dotfiles to follow for insperation 🤩
 [ThePrimeagen](https://github.com/ThePrimeagen/.dotfiles/tree/master/zsh)
 
+## Optimization of zsh
+[htr3n](https://htr3n.github.io/2018/07/faster-zsh/)
+
