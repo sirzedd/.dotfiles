@@ -23,7 +23,7 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 
 " idea action list
-" https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+" in intellij type :actionlist
 "
 " following 
 " https://github.com/OptimusCrime/ideavim/blob/master/ideavimrc
@@ -62,6 +62,7 @@ nnoremap <c-k> <c-w>k
 :map <leader>cc <Action>(CommentByLineComment)
 :map <leader>cb <Action>(CommentByBlockComment)
 
+
 " error
 nnoremap ge :action GotoNextError<CR>
 nnoremap gE :action GotoPreviousError<CR>
@@ -79,8 +80,8 @@ nnoremap <c-s> :action FileStructurePopup<CR>
 nnoremap <c-o> :action GotoSymbol<CR>
 nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotToDeclaration<CR>
-nnoremap gp :action GotToSuperMethod<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gp :action GotoSuperMethod<CR>
 nnoremap gt :action GotoTest<CR>
 #nnoremap gb :action Back<CR>
 #nnoremap gf :action Forward<CR>
@@ -88,13 +89,17 @@ map gb <Action>(Back)
 map gf <Action>(Forward)
 
 """ Running and Debugging
-nnoremap ,r :action ContextRun<CR>
-nnoremap ,c :action RunClass<CR>
+" run context
+nnoremap ,c :action ContextRun<CR>
+" run all
+nnoremap ,a :action RunClass<CR>
 nnoremap ,f :action ChooseRunConfiguration<CR>
 nnoremap ,t :action ActivateRunToolWindow<CR>
-nnoremap ,u :action Rerun<CR>
+nnoremap ,r :action Rerun<CR>
 nnoremap ,f :action RerunFailedTests<CR>
 nnoremap ,b :action ToggleLineBreakpoint<CR>
+" run debug context
 nnoremap ,d :action ContextDebug<CR>
 nnoremap ,n :action ActivateDebugToolWindow<CR>
 
+:map <leader>,c <Action>(CompileFile)

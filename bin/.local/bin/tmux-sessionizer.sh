@@ -4,7 +4,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
    # using FD to get color, pass to fzf which handles color
-    selected=$(fd -t=d -d=1 --color always . ~/apps ~/apps/testbed | fzf --ansi)
+    selected=$(fd -t=d -d=1 --color always . ~/apps ~/apps/testbed ~/dev-apps | fzf --ansi)
 fi
 
 if [[ -z $selected ]]; then
