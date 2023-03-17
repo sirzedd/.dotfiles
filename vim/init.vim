@@ -1,3 +1,5 @@
+ let g:coc_disable_startup_warning = 1
+
 " to pull from ~/.vimrc
 "set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "let &packpath=&runtimepath
@@ -74,6 +76,16 @@ set autoread
 "
 call plug#begin('~/.dotfile/vim/plugged')
 
+
+" JAVA IDE
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'mfussenegger/nvim-jdtls'
+
+"Already have
+"Plug 'nvim-lua/plenary.nvim'
+
 " Plug 'nvim-telescope/telescope.nvim'
 
 " Neovim tree sitter
@@ -86,10 +98,10 @@ call plug#begin('~/.dotfile/vim/plugged')
 " telescope requirements...
 " To check health of telescope
 " :checkhealth telescope 
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+"Plug 'nvim-lua/popup.nvim'
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
+"Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 " Color scheme gruvbox
 Plug 'gruvbox-community/gruvbox'
@@ -302,8 +314,8 @@ set updatetime=300
 " END RUST LSP
 
 
-colorscheme gruvbox
-"colorscheme desert
+"colorscheme gruvbox
+colorscheme desert
 "colorscheme monokai
 highlight Normal guibg=none
 
@@ -314,7 +326,7 @@ highlight Normal guibg=none
 " mode n normal" "no recursive execution " map
 let mapleader = " "
 " nvim plugin mappers there are other ones https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/telescope.vim
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+"nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 
 " undotree
 nnoremap <leader>u :UndotreeToggle<CR>

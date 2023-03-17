@@ -16,3 +16,31 @@ My goal is to keep any work specific vim config (if there is any) in the `~/.con
 
 After starting vim I need to run `:PlugInstall` to install all those tasty plugins 🤤
 
+
+## IDE
+
+Install plugins
+
+```
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-jdtls'
+Plug 'nvim-lua/plenary.nvim'
+```
+
+install jdtls
+
+```
+brew install jdtls
+```
+
+or
+
+```
+sudo apt-get install eclipse-jdt-ls
+```
+
+
+
+
+
+
