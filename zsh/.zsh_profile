@@ -1,5 +1,5 @@
 # Fix issue with tmux having delete do space instead
-TERM=xterm
+#TERM=xterm
 
 DISABLE_AUTO_TITLE="true"
 ZSH_DISABLE_COMPFIX="true"
