@@ -1,6 +1,9 @@
 " Point ideavimdrc to vimrc
 " https://stackoverflow.com/questions/5585687/is-there-a-way-to-get-ideavim-to-honor-the-mappings-from-my-vimrc-file
 set sneak
+set relativenumber
+
+let mapleader=" "
 
 nnoremap <leader>sr :source ~/.ideavimrc<CR>
 
@@ -34,6 +37,7 @@ nnoremap <c-k> <c-w>k
 " easy window navigation
 " nnoremap <c-k> gT
 " nnoremap <c-j> gt
+:map <leader>y [["+y]]
 
 
 " code navigation
