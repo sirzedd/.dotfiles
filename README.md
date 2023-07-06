@@ -30,6 +30,40 @@ https://rakhesh.com/mac/using-hidutil-to-map-macos-keyboard-keys/
 Use hidutil or build a Launch Agent
 
 
+## Installations
+
+These installations will need to happen before these can work
+
+### TMUX
+
+#### Tmux plugins
+
+https://github.com/tmux-plugins/tpm
+
+### ripgrep
+
+`brew install ripgrep`
+
+### exa replacement for ls 
+
+`brew install exa`
+
+### Bat the cat replacement
+
+`brew install bat`
+
+### FD find replacement
+
+`brew install fd`
+
+### FZF
+
+`brew install fzf`
+
+Additional command to install useful key bindings and fuzzy completion:
+Not sure I did this.
+
+`$(brew --prefix)/opt/fzf/install`
 
 
 ## .dotfiles to follow for insperation 🤩
