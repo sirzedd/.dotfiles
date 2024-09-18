@@ -115,7 +115,7 @@ use({
       workspaces = {
         {
           name = "work",
-          path = "~/onedrive/OneDrive - Aegon/files/docs/transamerica-vault-2024/",
+          path = "~/vaultlocation",
         },
       },
        attachments = {
