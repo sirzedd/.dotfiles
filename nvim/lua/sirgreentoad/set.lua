@@ -33,4 +33,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.errorbells = false
 vim.opt.visualbell = false
 
-
+vim.api.nvim_create_autocmd({"BufLeave", "FocusLost"}, {
+  pattern = "*",
+  command = "silent! wall",
+})
