@@ -22,19 +22,6 @@ lsp.configure('lua-language-server', {
     }
 })
 
-lsp.configure('kotlin_language_server', {
-    settings = {
-        kotlin = {
-            compiler = {
-                jvm = {
-                    target = '17'
-                }
-            }
-        }
-
-    }
-})
-
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
