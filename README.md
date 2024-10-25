@@ -5,6 +5,16 @@ This rep contains my personal dotfiles that I have been using between my compute
 
 The goal has been to keep my personal configs separate from work by referencing my personal files from the work ones.  This allows me to add work specific in the machine and I won't worry about uploading anything.
 
+## Mac
+
+// remove the key accents when holding them
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+// Allow repeating
+defaults write -g ApplePressAndHoldEnabled 0'
+
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 ## bin/.local/bin
 

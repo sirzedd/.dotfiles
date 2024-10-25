@@ -15,17 +15,28 @@ return require('packer').startup(function(use)
   }
 
   -- Added 2024-07-29
-  use({
-    'MeanderingProgrammer/markdown.nvim',
-    as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-    after = { 'nvim-treesitter' },
-    requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
-    -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
-    --requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
-    config = function()
-        require('render-markdown').setup({})
-    end,
+--   use({
+--     'MeanderingProgrammer/markdown.nvim',
+--     as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+--     after = { 'nvim-treesitter' },
+--     requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+--     -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+--     --requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+--     config = function()
+--         require('render-markdown').setup({})
+--     end,
+-- })
+use({
+  'MeanderingProgrammer/render-markdown.nvim',
+  after = { 'nvim-treesitter' },
+  requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+  -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+  -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+  config = function()
+      require('render-markdown').setup({})
+  end,
 })
+
 
 -- easy moving around with f and F, t and T
 --use 'justinmk/vim-sneak'

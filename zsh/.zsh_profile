@@ -4,6 +4,7 @@
 DISABLE_AUTO_TITLE="true"
 ZSH_DISABLE_COMPFIX="true"
 
+
 # vi editing mode in bash and in iTerm2
 set -o vi
 
@@ -21,6 +22,16 @@ sourceFolder "zsh"
 # Add Dotfiles bin to path
 addToPathFront $DOTFILES/bin/.local/bin
 
+echo "Alias lnks"
+# set lnks alias
+# run 
+alias lnks="$DOTFILES/bin/.local/bin/lnks.sh -d $HOME/files/docs/lnks-bookmarks"
+
+
+## Need docker or podman
+alias docker=podman
+#alias terraform='docker run --rm -it -w $PWD:$PWD -v $PWD:$PWD hashicorp/terraform:1.9'
+alias terraform='podman run --rm -it -w $PWD:$PWD -v $PWD:$PWD terraform:latest'
 
 # Functions
 function ap() {
