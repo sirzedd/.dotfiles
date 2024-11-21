@@ -4,6 +4,12 @@
 DISABLE_AUTO_TITLE="true"
 ZSH_DISABLE_COMPFIX="true"
 
+# K8s environment variables
+# #https://blog.dcycle.com/kubernetes/05-interacting/
+#export KUBECONFIG=$HOME/.kube/config:~/.kube/kubernetes-helper-kubernetes-tutorial.yml
+#export KUBECONFIGONDOCKER=$HOME/.kube/config:/root/.kube/kubernetes-helper-kubernetes-tutorial.yml
+export KUBECONFIG=$HOME/.kube/config
+export KUBECONFIGONDOCKER=$HOME/.kube/config
 
 # vi editing mode in bash and in iTerm2
 set -o vi
@@ -29,9 +35,93 @@ alias lnks="$DOTFILES/bin/.local/bin/lnks.sh -d $HOME/files/docs/lnks-bookmarks"
 
 
 ## Need docker or podman
-alias docker=podman
-#alias terraform='docker run --rm -it -w $PWD:$PWD -v $PWD:$PWD hashicorp/terraform:1.9'
-alias terraform='podman run --rm -it -w $PWD:$PWD -v $PWD:$PWD terraform:latest'
+## alias docker=podman
+#alias terraform='docker run --rm -it brew install postgresql-w $PWD:$PWD -v $PWD:$PWD hashicorp/terraform:1.9'
+
+#alias tf='docker run --rm -it -w $PWD:$PWD -v $PWD:$PWD terraform:1.9'
+#alias tf='docker run -v ~/.terraform:/root/.terraform -v ~/.terraform.d:/root/.terraform.d -v `pwd`:/docker -v ~/.config:/root/.config -w /docker --rm -it hashicorp/terraform:1.9.8'
+
+## postgres
+# trying mac build for it
+#alias psql='docker run -it --rm --network postgres-network postgres psql -h postgres -U postgres:16'
+#TODO need createdb from postgres
+
+# Kubernetes
+#alias kubectl='docker run -v ~/.kube/config:/.kube/config -v `pwd`:/docker --name kubectl --rm -it bitnami/kubectl:latest'
+#alias k='docker run -v ~/.kube/config:/.kube/config --name kubectl --rm -it bitnami/kubectl:latest'
+
+alias reveal='docker run --rm -v $(pwd)/docs/slides:/reveal/docs/slides -v $(pwd)/images:/reveal/images -v $(pwd)/scripts/test:/resources -p 8080:8080 cloudogu/reveal.js'
+
+#https://github.com/webpro/reveal-md couldn't get it working
+#alias reveal='docker run --rm -p 1948:1948 -p 35729:35729 -v $(pwd)/docs/slides:/slides  webpronl/reveal-md:latest /slides --watch'
+#alias reveal='docker run --rm -p 1948:1948 -v $(pwd)/docs/slides:/slides webpronl/reveal-md:latest'
+
+# Might not be working
+#alias ant='docker run --rm -v $(pwd):/work ant:1.0'
+
+
+#function slugify() {
+#    echo "$1" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9-]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z
+#}
+#
+#function env_name() {
+#    echo $(slugify ${${1:-$PWD}: -200})
+#}
+
+#function py-env() {
+#    docker run --rm -it -v "$(env_name $1)_python":/usr/local/lib -v "${PWD}":/usr/src/app -w /usr/src/app python:latest bash
+#}
+#
+#alias python='docker run --rm -it -v "${PWD}":/usr/src/app -w /usr/src/app -v $(env_name $1)_python:/usr/local/lib python:latest python'
+
+
+function py-env-del() {
+    docker volume rm "$(env_name $1)_python"
+}
+
+#Helm
+# alias helm='docker run -e KUBECONFIG="$KUBECONFIGONDOCKER" -ti --rm -v $(pwd):/apps -v ~/.kube:/root/.kube -v ~/.config/helm:/root/.config/helm -v ~/.cache/helm:/root/.cache/helm -v ~/.helm:/root/.helm alpine/helm'
+source <(helm completion zsh)
+
+
+#chatgpt
+#alias helm='docker run --rm -it -v $HOME/.config/helm:/root/.config/helm bitnami/helm:latest'
+
+
+# Aws
+#alias aws='docker run --rm -ti -v ~/.aws:/root/.aws -v $(pwd):/aws amazon/aws-cli:latest'
+
+
+# k9s 
+# https://hub.docker.com/r/derailed/k9s?ref=devtron.ai
+# alias k9s='docker run --rm -it-v ~/.aws:/root/.aws -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s'
+#alias k9s='docker run --rm -it -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s'
+
+#alias marp='docker run --rm -it ghcr.io/marp-team/marp-cli'
+#
+#alias backs='docker run --rm registry.gitlab.com/mpolitze/backslide-docker:latest'
+
+# Presentation
+#alias pandoc='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/core'
+
+# NPM
+# Specify node environment
+node_env='development'
+
+# Specify docker image to use
+node_image='node'
+
+# Add extra parameters if needed
+node_args='-p 80:80 -p 8080:8080'
+
+# Aliases
+alias npm="docker run --user $(id -u):$(id -g) -it --rm -e HOME=$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image npm"
+alias node="docker run --user $(id -u):$(id -g) -it --rm -e HOME:$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image node"
+
+
+##end NPM
+
+
 
 # Functions
 function ap() {
@@ -42,6 +132,10 @@ function ap() {
   else
     groovy ~/bin/atom-project.groovy $@
   fi
+}
+
+function pb_jq() {
+  pbpaste | jq | pbcopy
 }
 
 function tmux-resurrect-reset-last() {
@@ -137,6 +231,9 @@ autoload -Uz man
 # aws command completer.  Installs when installing aws command
 complete -C '/usr/local/bin/aws_completer' aws
 
+#FPATH="$HOME/.docker/completions:$FPATH"
+#autoload -Uz compinit
+#compinit
 
 # I believe this comes from tfswitch for switching terraform and making sure to pick the right version?
 #complete -o nospace -C /usr/local/bin/terraform terraform

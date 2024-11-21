@@ -7,6 +7,7 @@ hyper = hs.hotkey.modal.new({}, "F17")
 
 -- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
 local function enterHyperMode()
+  hs.alert.show("Enter")
   hyper.triggered = false
   hyper:enter()
 end
