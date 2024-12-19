@@ -19,5 +19,5 @@ function ColorMyBar(color)
 
 end
 
-ColorMyPencils()
-ColorMyBar()
+--ColorMyPencils()
+--ColorMyBar()

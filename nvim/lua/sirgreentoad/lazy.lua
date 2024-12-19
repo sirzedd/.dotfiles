@@ -41,7 +41,39 @@ require('lazy').setup({
 {
   'nvim-telescope/telescope.nvim', tag = '0.1.4',
   -- or                            , branch = '0.1.x',
-  dependencies = { {'nvim-lua/plenary.nvim'} }
+  dependencies = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+        local builtin = require('telescope.builtin')
+        local default_opts = {noremap = true}
+
+        require('telescope').setup{
+        pickers = {
+            --Allow hidden for grep
+            live_grep = {
+            additional_args = function(opts)
+                return {"--hidden", "--smart-case"}
+            end
+            }
+        }
+        }
+
+
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
+        --vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+        --Default ctrl+p lookup, it doesn't look for . hidden files
+        --vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+        --
+        -- Finds hidden files
+        vim.keymap.set('n', '<C-p>', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", default_opts)
+
+
+        vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
+
+        --vim.keymap.set('n', '<leader>ps', function()
+        --	builtin.grep_string({ search = vim.fn.input("Grep > ") })
+        --end)
+        vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+    end
 },
 
 -- Added 2024-07-29
@@ -124,6 +156,9 @@ lazy = true,
   lazy = true,
   config = function()
     require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+         require'hop'.setup()
+         vim.api.nvim_set_keymap("n", "<Leader>;", "<cmd>HopWord<CR>", {noremap=false})
+
   end
 },
 
@@ -132,6 +167,27 @@ lazy = true,
   "stevearc/oil.nvim",
   config = function()
     require("oil").setup()
+
+        require("oil").setup({
+        use_default_keymaps = false,
+        keymaps = {
+            ["<CR>"] = "actions.select",
+            ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+            ["<C-s>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+            ["-"] = "actions.parent",
+            ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+            ["gx"] = "actions.open_external",
+            ["g."] = "actions.toggle_hidden",
+        },
+        view_options = {
+            show_hidden = true
+
+        },
+
+        })
+
+
+        vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 },
 
@@ -140,7 +196,13 @@ lazy = true,
   "HakonHarnes/img-clip.nvim",
   lazy = true,
   config = function()
+
     require("img-clip").setup({
+        default = {
+        dir_path = "attachment-images",
+        relative_to_current_file = false,
+        insert_mode_after_paste = false,
+        },
       opts = {
     -- add options here
     -- or leave it empty to use the default settings
@@ -239,6 +301,7 @@ lazy = true,
   priority=1000,
   config = function()
   vim.cmd('colorscheme rose-pine')
+    disable_background = true
   end
 },
 
@@ -307,7 +370,27 @@ lazy = true,
 {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    dependencies = { {"nvim-lua/plenary.nvim"} }
+    dependencies = { {"nvim-lua/plenary.nvim"} },
+    config = function()
+        local harpoon = require("harpoon")
+
+        -- REQUIRED
+        harpoon:setup()
+        -- REQUIRED
+
+        vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
+        vim.keymap.set("n", "<C-m>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+        vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+        vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+        vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+        vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+
+        -- Toggle previous & next buffers stored within Harpoon list
+        vim.keymap.set("n", "<C-S-1>", function() harpoon:list():prev() end)
+        vim.keymap.set("n", "<C-S-2>", function() harpoon:list():next() end)
+
+    end
 },
 
 'mbbill/undotree',

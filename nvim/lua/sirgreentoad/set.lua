@@ -62,6 +62,24 @@ vim.opt.foldlevelstart = 99
 --deeply nested code gets folded
 vim.opt.foldnestmax = 4
 
+-- Function to check file size and disable folds for large files
+local function disable_folds_for_large_files()
+  local max_file_size = 1024 * 1024 -- 1 MB, adjust as needed
+  local file_path = vim.fn.expand('%:p') -- Get full file path
+  local file_size = vim.fn.getfsize(file_path) -- Get file size in bytes
+
+  if file_size > max_file_size then
+    vim.opt_local.foldmethod = "manual" -- Disable automatic folds
+    vim.opt_local.foldenable = false    -- Disable folds
+    --notify to UI to test if it works
+    --vim.notify("Folds disabled for large file: " .. file_path, vim.log.levels.WARN)
+  end
+end
+
+-- Autocommand to run the function on file read
+vim.api.nvim_create_autocmd({"BufReadPre", "FileReadPre"}, {
+  callback = disable_folds_for_large_files,
+})
 
 --vim.api.nvim_create_autocmd({"BufReadPre", "FileReadPre"}, {
 --  callback = function()
