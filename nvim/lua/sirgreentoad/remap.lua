@@ -67,7 +67,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 --reload source
-vim.keymap.set("n", "<leader><leader>", function()
+vim.keymap.set("n", "<leader><leader>r", function()
     vim.cmd("source ~/.config/nvim/init.lua")
 end)
 
@@ -75,13 +75,16 @@ end)
 vim.keymap.set("i", "kj", "<ESC>")
 vim.keymap.set("i", "KJ", "<ESC>")
 
+--go back
 vim.keymap.set("n", "gb", "<C-O>")
+--go forward
+vim.keymap.set("n", "gf", "<C-I>")
 
-vim.keymap.set("n", "gf", function()
+vim.keymap.set("n", "gd", function()
   if require("obsidian").util.cursor_on_markdown_link() then
     return "<cmd>ObsidianFollowLink<CR>"
   else
-    return "gf"
+    return 'gf'
   end
 end, { noremap = false, expr = true })
 

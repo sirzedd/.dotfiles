@@ -1,4 +1,4 @@
-# ReadME
+# README
 
 ## Requirements
 * RipGrep needs to be installed

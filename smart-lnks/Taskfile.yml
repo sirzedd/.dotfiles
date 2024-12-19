@@ -1,0 +1,7 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -o deploy/smart-lnks
+      - cp deploy/smart-lnks ~/.dotfiles/bin/.local/bin

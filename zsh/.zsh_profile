@@ -31,7 +31,11 @@ addToPathFront $DOTFILES/bin/.local/bin
 echo "Alias lnks"
 # set lnks alias
 # run 
-alias lnks="$DOTFILES/bin/.local/bin/lnks.sh -d $HOME/files/docs/lnks-bookmarks"
+#alias lnks="$DOTFILES/bin/.local/bin/lnks.sh -d $HOME/files/docs/lnks-bookmarks"
+alias lnks="$DOTFILES/bin/.local/bin/smart-lnks"
+
+alias d="docker"
+alias dc="docker compose"
 
 
 ## Need docker or podman

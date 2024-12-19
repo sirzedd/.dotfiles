@@ -1,4 +1,3 @@
 require("sirgreentoad.remap")
 require("sirgreentoad.set")
-require("sirgreentoad.packer")
-
+require("sirgreentoad.lazy")

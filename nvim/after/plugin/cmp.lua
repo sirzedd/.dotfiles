@@ -1,0 +1,5 @@
+--require('cmp').setup({
+--  snippet = {
+--    expand = require("lsp-zero").noop,
+--  },
+--})

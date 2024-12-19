@@ -5,8 +5,10 @@ container_id=$(docker ps --format "{{.ID}}: {{.Names}}" | fzf | cut -d: -f1)
 
 # Check if a container was selected
 if [ -n "$container_id" ]; then
+  docker debug "$container_id"
+
   # Exec into the container with a full interactive bash shell
-  docker exec -it "$container_id" /bin/bash || docker exec -it "$container_id" /bin/sh
+  #docker exec -it "$container_id" /bin/bash || docker exec -it "$container_id" /bin/sh
 else
   echo "No container selected."
 fi

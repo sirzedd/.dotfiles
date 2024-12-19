@@ -1,2 +1,2 @@
-lua require('plugins')
+-- require('plugins')
 require("sirgreentoad")

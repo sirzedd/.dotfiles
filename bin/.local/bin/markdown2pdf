@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -eux
+
+# Check if an argument is provided
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <markdown-file>"
+  exit 1
+fi
+
+# Input Markdown file (first argument)
+INPUT_MD_FILE="$1"
+
+# Get the base name of the input file (without extension)
+BASENAME=$(basename "${INPUT_MD_FILE}" .md)
+
+# Temporary and output files
+OUT_ADOC_FILE="${BASENAME}.adoc"
+OUT_PDF_FILE="${BASENAME}.pdf"
+
+echo "Clearing temporary files (if they exist)"
+
+# Clear any temporary files
+(rm -f "${OUT_ADOC_FILE}" "${OUT_PDF_FILE}" || true)
+
+# Convert Markdown to Asciidoctor
+docker run --rm -v "$(pwd)":/data pandoc/core -f markdown -t asciidoc -i "${INPUT_MD_FILE}" -o "${OUT_ADOC_FILE}"
+
+# Convert Asciidoctor to PDF
+docker run --rm -v "$(pwd)":/documents/ asciidoctor/docker-asciidoctor asciidoctor-pdf "${OUT_ADOC_FILE}"
+
+# No need to rename, the PDF will already have the correct name
+echo "Conversion completed: ${OUT_PDF_FILE}"
+

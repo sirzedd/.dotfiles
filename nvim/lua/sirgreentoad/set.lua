@@ -8,6 +8,10 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
+-- Ignore search case and smart case searching
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = false
@@ -37,3 +41,48 @@ vim.api.nvim_create_autocmd({"BufLeave", "FocusLost"}, {
   pattern = "*",
   command = "silent! wall",
 })
+
+
+-- Code Folding https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+-- zR opens all folds
+-- zM close all folds
+-- za toggles fold
+-- zk and zj to navigate folds
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--remove extra column during fold
+vim.opt.foldcolumn = "0"
+--remove syntax highlighting in fold
+vim.opt.foldtext = ""
+
+--foldlevel
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+--deeply nested code gets folded
+vim.opt.foldnestmax = 4
+
+
+--vim.api.nvim_create_autocmd({"BufReadPre", "FileReadPre"}, {
+--  callback = function()
+--     local max_filesize = 1024 * 1024 * 2 -- 1 MB * 2 = 2 MB?
+--    local file = vim.fn.expand("%:p")
+--    if vim.fn.getfsize(file) > max_filesize then
+--      -- Example of disabling plugins for large files
+--      vim.cmd("syntax off")
+--      vim.cmd("setlocal noundofile")
+--      vim.cmd("setlocal nocursorline")
+--      vim.cmd("setlocal noswapfile")
+--      vim.cmd("setlocal nospell")
+--      vim.cmd("setlocal noloadplugins")
+--
+--      -- Optional: Disable specific plugins
+--      -- vim.g.loaded_plugin_name = 1
+--
+--      print("Large file detected. Certain features have been disabled.")
+--  end
+--end,
+--
+--})
+
+
