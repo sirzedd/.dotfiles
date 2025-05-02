@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git commit -a -F $(git config commit.template) -e
+

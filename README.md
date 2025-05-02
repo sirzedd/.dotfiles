@@ -2,7 +2,6 @@
 
 This rep contains my personal dotfiles that I have been using between my computers.  
 
-
 The goal has been to keep my personal configs separate from work by referencing my personal files from the work ones.  This allows me to add work specific in the machine and I won't worry about uploading anything.
 
 ## Mac

@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # Calculate disk usage for each option with error handling
 

@@ -1,3 +1,17 @@
 function gw() {
-    ./gradlew $@
+    if [ -f "./gradlew" ]; then
+        ./gradlew "$@"
+    else
+        command gradle "$@"
+    fi
+}
+
+
+# First run the gradlew command, if it doesn't exist use the installed gradle
+gradle() {
+    if [ -f "./gradlew" ]; then
+        ./gradlew "$@"
+    else
+        command gradle "$@"
+    fi
 }

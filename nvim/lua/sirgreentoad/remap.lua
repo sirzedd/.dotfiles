@@ -80,13 +80,15 @@ vim.keymap.set("n", "gb", "<C-O>")
 --go forward
 vim.keymap.set("n", "gf", "<C-I>")
 
-vim.keymap.set("n", "gd", function()
-  if require("obsidian").util.cursor_on_markdown_link() then
-    return "<cmd>ObsidianFollowLink<CR>"
-  else
-    return 'gf'
-  end
-end, { noremap = false, expr = true })
+--gx exists and gd should go under method
+--vim.keymap.set("n", "gd", function()
+--  if require("obsidian").util.cursor_on_markdown_link() then
+--    return "<cmd>ObsidianFollowLink<CR>"
+--  else
+--    return 'gf'
+--  end
+--end, { noremap = false, expr = true })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { silent = true })
 
 vim.keymap.set("n", "<leader><leader>p", ":PasteImage<CR>",{ noremap = true, silent = true })
 

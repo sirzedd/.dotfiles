@@ -3,20 +3,25 @@
 # Start of Commit Message
 #########################
 #
-#
-# Title
+# [Title]
+# <type>: In under 50 characters, description of the commit
+# No more than 50 chars. #### 50 chars is here:  #
 
-# Body
 
-# Footer PR/Ticket
-Co-authored-by: Joshua Hendricks <joshua.hendricks@infor.com>
+# [Body]
+# Explain in detail what was done in this commit and 
+# what this is supposed to achieve. Keep this section
+# under 72 characters per line. 
+# Body: Explain *what* and *why* (not *how*). Include task ID (Jira issue).
+# Wrap at 72 chars. ################################## which is here:  #
 
-#
-#
-#######################
-# End of Commit Message
-#######################
-#
+
+# [Footer]
+# Use this section to add any PR/Ticket numbers that this
+# commit is solving or any co-authors. If none of these apply, # leave it empty.
+# Co-authored-by: Joshua Hendricks <joshua.hendricks@infor.com>
+
+
 #
 # Keep each commit line under 50 characters
 # Following conventional commits 1.0.0 
@@ -30,21 +35,6 @@ Co-authored-by: Joshua Hendricks <joshua.hendricks@infor.com>
 #
 # Commits should follow the format below:
 #
-# [Title]
-# <type>: In under 50 characters, description of the commit
-# No more than 50 chars. #### 50 chars is here:  #
-#
-# [Body]
-# Explain in detail what was done in this commit and 
-# what this is supposed to achieve. Keep this section
-# under 72 characters per line. 
-# Body: Explain *what* and *why* (not *how*). Include task ID (Jira issue).
-# Wrap at 72 chars. ################################## which is here:  #
-# 
-# [Footer]
-# Use this section to add any PR/Ticket numbers that this
-# commit is solving or any co-authors. If none of these apply, # leave it empty.
-#
 # How to Write a Git Commit Message:
 # https://chris.beams.io/posts/git-commit/
 #
@@ -55,5 +45,11 @@ Co-authored-by: Joshua Hendricks <joshua.hendricks@infor.com>
 # 5. Use the imperative mood in the subject line
 # 6. Wrap the body at 72 characters
 # 7. Use the body to explain what and why vs. how
+#
+#######################
+# End of Commit Message
+#######################
+#
+#
 
 

@@ -38,6 +38,12 @@ alias d="docker"
 alias dc="docker compose"
 
 
+# Give a count of files in current directory
+alias lscount="ls | wc -l"
+# List extensions in a directory
+alias list_directory_extensions="find . -type f -name \"*.*\" | sed -n 's|.*\.||p' | sort | uniq"
+
+
 ## Need docker or podman
 ## alias docker=podman
 #alias terraform='docker run --rm -it brew install postgresql-w $PWD:$PWD -v $PWD:$PWD hashicorp/terraform:1.9'
@@ -136,6 +142,40 @@ function ap() {
   else
     groovy ~/bin/atom-project.groovy $@
   fi
+}
+
+function compare_dirs() {
+ # List of file patterns to ignore
+  IGNORE_PATTERNS=(".DS_Store" "Thumbs.db" "*.log")
+
+  if [ $# -ne 2 ]; then
+    echo "Usage: $0 <directory1> <directory2>"
+    exit 1
+  fi
+
+  dir1=$1
+  dir2=$2
+
+  # Escape special characters in the patterns
+  escaped_patterns=()
+  for pattern in "${IGNORE_PATTERNS[@]}"; do
+    escaped_patterns+=("$(printf '%s' "$pattern" | sed 's/[]\[^$.*/+?(){}|]/\\&/g')")
+  done
+
+  # Join the patterns with '|'
+  IGNORE_REGEX=$(IFS='|'; echo "${escaped_patterns[*]}")
+
+  echo "Comparing $dir1 with $dir2 for presence/absence of files and directories (ignoring: ${IGNORE_PATTERNS[*]}):"
+
+  # Perform comparison and filter out ignored patterns
+  diff -qr "$dir1" "$dir2" | grep -E "(Only in)" | grep -Ev "$IGNORE_REGEX"
+}
+
+
+notify_me() {
+  local description="$1"
+  shift
+  "$@" && osascript -e "display notification \"$description\" with title \"Terminal Command Completed\"" || osascript -e "display notification \"$description\" with title \"Terminal Command Failed\""
 }
 
 function pb_jq() {

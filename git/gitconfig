@@ -2,8 +2,9 @@
 [user]
 # Please adapt and uncomment the following lines:
 name = Joshua Hendricks
-email = 
+email = joshua.hendricks@infor.com
 [alias]
+  # Git Town
 #	append = town append
 #	hack = town hack
 #	kill = town kill
@@ -16,6 +17,23 @@ email =
 #	sync = town sync
 #
 #	Using git tool called git-branchless
+#
+# STASHING 
+  save = stash push -m # git save "feature"
+  stashes = stash list #     git stashes shows list
+  pop-save = !git stash apply stash^{/} #git pop-save feature
+
+  stash-select = !sh -c 'git stash list | fzf --height 40% --reverse --ansi \
+      --preview \"echo {} | cut -d: -f1 | xargs git stash show -p --color=always\" \
+      --preview-window=right:65% \
+      --bind \"enter:execute(echo {} | cut -d: -f1 | xargs git stash apply)+abort\" \
+      --bind \"ctrl-d:execute(echo {} | cut -d: -f1 | xargs git stash drop)+abort\" \
+      --bind \"ctrl-p:execute(echo {} | cut -d: -f1 | xargs git stash pop)+abort\" \
+      --header \"Enter: apply, C-d: drop, C-p: pop\"' -
+
+  stash-browse = !sh -c 'git stash list | fzf --height 40% --reverse --ansi \
+      --preview \"echo {} | cut -d: -f1 | xargs git stash show -p --color=always\" \
+      --preview-window=right:65%' -
 
   # Pulling
   pulldevelop = "!git checkout develop && git pull --set-upstream origin develop && git checkout -"
@@ -40,6 +58,7 @@ email =
   #  quick stash 
   st = !git stash push -m
 
+  cm = !bash -c git-commit-template
 
   ls = log --oneline
   #fdiff = "! preview='git diff $@ --color=always -- {-1}' && git diff $@ --name-only | fzf -m --ansi --preview $preview "
@@ -64,6 +83,9 @@ email =
 #  undo = reset HEAD~1 --mixed
   
 [core]
-	editor = /Users/jhendri2/files/dev/tools/homebrew/bin/nvim
+	editor = /opt/homebrew/bin/nvim
 [branch]
 #	autoSetupMerge = off
+[commit]
+	template = /Users/joshua.hendricks/.dotfiles/git/git-commit-message.txt
+

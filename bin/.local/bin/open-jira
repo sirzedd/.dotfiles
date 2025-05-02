@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Path to the ticket list file
+ticket_file=~/files/docs/jira_tickets.txt
+
+# Check if the ticket file exists
+if [[ ! -f $ticket_file ]]; then
+  echo "No ticket list found at $ticket_file. Create one first using 'edit-jira'."
+  exit 1
+fi
+
+# Use fzf to select a ticket
+ticket=$(cat $ticket_file | fzf --prompt="Select a Jira ticket: ")
+
+# Open the ticket in the default browser
+if [[ -n $ticket ]]; then
+  open "https://inforwiki.atlassian.net/browse/$ticket"
+else
+  echo "No ticket selected."
+fi
+  

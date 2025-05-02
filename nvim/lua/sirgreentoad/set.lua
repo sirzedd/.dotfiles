@@ -1,7 +1,9 @@
 #
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append({ 'unnamedplus' })
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
+
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -9,7 +11,10 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- Ignore search case and smart case searching
+-- Ignore case
 vim.opt.ignorecase = true
+-- smartcase if search is lower the search ignores
+-- any caps make it search exact
 vim.opt.smartcase = true
 
 vim.opt.smartindent = true

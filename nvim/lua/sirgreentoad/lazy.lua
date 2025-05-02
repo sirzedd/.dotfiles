@@ -75,7 +75,13 @@ require('lazy').setup({
         vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     end
 },
-
+-- Added 2025-05-02 add pretty logging https://github.com/fei6409/log-highlight.nvim
+{
+    'fei6409/log-highlight.nvim',
+    config = function()
+        require('log-highlight').setup {}
+    end,
+},
 -- Added 2024-07-29
 {
     'MeanderingProgrammer/render-markdown.nvim',
@@ -181,7 +187,6 @@ lazy = true,
         },
         view_options = {
             show_hidden = true
-
         },
 
         })
@@ -194,7 +199,6 @@ lazy = true,
 
 {
   "HakonHarnes/img-clip.nvim",
-  lazy = true,
   config = function()
 
     require("img-clip").setup({
@@ -425,6 +429,12 @@ lazy = true,
        -- more sources
       },
     }
+    end
+  },
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
     end
   },
 
