@@ -4,7 +4,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
    # using FD to get color, pass to fzf which handles color
-   selected=$(fd -t=d -d=1 --color always . ~/apps ~/devapps ~/testbed | cat - <(echo ~/.config/nvim/; echo ~/.gitconfig; echo ~/.dotfiles; echo ~/files/docs/infor-vault/; echo ~/files/docs/lnks-bookmarks/;) | fzf --ansi)
+   selected=$(fd -t=d -d=1 --color always . ~/apps ~/devapps ~/testbed ~/dev-training/ ~/docker_volumes/appcode/ | cat - <(echo ~/.config/nvim/; echo ~/.gitconfig; echo ~/.dotfiles; echo ~/files/docs/infor-vault/; echo ~/files/docs/lnks-bookmarks/;) | fzf --ansi)
 fi
 
 if [[ -z $selected ]]; then

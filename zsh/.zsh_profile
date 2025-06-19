@@ -116,17 +116,17 @@ source <(helm completion zsh)
 
 # NPM
 # Specify node environment
-node_env='development'
-
-# Specify docker image to use
-node_image='node'
-
-# Add extra parameters if needed
-node_args='-p 80:80 -p 8080:8080'
+#node_env='development'
+#
+## Specify docker image to use
+#node_image='node'
+#
+## Add extra parameters if needed
+#node_args='-p 80:80 -p 8080:8080'
 
 # Aliases
-alias npm="docker run --user $(id -u):$(id -g) -it --rm -e HOME=$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image npm"
-alias node="docker run --user $(id -u):$(id -g) -it --rm -e HOME:$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image node"
+#alias npm="docker run --user $(id -u):$(id -g) -it --rm -e HOME=$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image npm"
+#alias node="docker run --user $(id -u):$(id -g) -it --rm -e HOME:$HOME -e NODE_ENV=$node_env -v $HOME:$HOME -v $(pwd):/usr/app/ -w /usr/app $node_args $node_image node"
 
 
 ##end NPM

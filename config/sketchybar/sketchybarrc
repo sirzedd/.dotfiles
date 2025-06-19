@@ -1,0 +1,169 @@
+#!/bin/bash
+
+source "$HOME/.config/sketchybar/colors.sh" # Loads all defined colors
+source "$HOME/.config/sketchybar/icons.sh" # Loads all defined icons
+
+ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where the items are configured
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
+
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+PADDINGS=3 # All paddings use this value (icon, label, background)
+
+# Setting up and starting the helper process
+HELPER=git.felix.helper
+killall helper
+cd $HOME/.config/sketchybar/helper && make
+$HOME/.config/sketchybar/helper/helper $HELPER > /dev/null 2>&1 &
+
+# Unload the macOS on screen indicator overlay for volume change
+launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+
+# Setting up the general bar appearance of the bar
+bar=(
+  height=40
+  color=$BAR_COLOR
+  shadow=on
+  position=top
+  sticky=on
+  padding_right=10
+  padding_left=10
+  corner_radius=9
+  y_offset=0
+  margin=10
+  blur_radius=20
+  notch_width=0
+)
+
+sketchybar --bar "${bar[@]}"
+
+# Setting up default values
+defaults=(
+  updates=when_shown
+  icon.font="$FONT:Bold:14.0"
+  icon.color=$ICON_COLOR
+  icon.padding_left=$PADDINGS
+  icon.padding_right=$PADDINGS
+  label.font="$FONT:Semibold:13.0"
+  label.color=$LABEL_COLOR
+  label.padding_left=$PADDINGS
+  label.padding_right=$PADDINGS
+  padding_right=$PADDINGS
+  padding_left=$PADDINGS
+  background.height=30
+  background.corner_radius=9
+  popup.background.border_width=2
+  popup.background.corner_radius=9
+  popup.background.border_color=$POPUP_BORDER_COLOR
+  popup.background.color=$POPUP_BACKGROUND_COLOR
+  popup.blur_radius=20
+  popup.background.shadow.drawing=on
+)
+
+sketchybar --default "${defaults[@]}"
+
+# Left
+source "$ITEM_DIR/apple.sh"
+
+# AeroSpace workspace
+sketchybar --add event aerospace_workspace_change
+sketchybar --add item workspace left \
+           --set workspace script="$HOME/.config/sketchybar/plugins/aerospace_workspace.sh" \
+                           label.padding_right=15 \
+           --subscribe workspace aerospace_workspace_change
+
+# Left
+source "$ITEM_DIR/aerospace_binding.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+
+
+# Center
+source "$ITEM_DIR/spotify.sh"
+
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/brew.sh"
+source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/cpu.sh"
+
+
+# Register custom event for dock badge updates
+sketchybar --add event dock_badge_update com.apple.dock.badgechanged
+
+# Teams Notification Item
+sketchybar --add item teams_badge right \
+           --set teams_badge icon="󰊻" \
+                            icon.font="Hack Nerd Font:Regular:14.0" \
+                            icon.color=0xffffffff \
+                            icon.padding_right=2 \
+                            label="0" \
+                            label.font="Hack Nerd Font:Regular:12.0" \
+                            label.color=0xffffffff \
+                            label.padding_left=2 \
+                            label.padding_right=5 \
+                            background.color=0x1a1b26 \
+                            background.border_color=0xffffffff \
+                            background.border_width=1 \
+                            background.height=26 \
+                            background.corner_radius=8 \
+                            background.padding_left=5 \
+                            background.padding_right=5 \
+                            script="$HOME/.config/sketchybar/plugins/teams_badge.sh" \
+                            update_freq=10 \
+                            updates=on \
+                            click_script="open -a 'Microsoft Teams'"
+
+# Outlook Notification Item
+sketchybar --add item outlook_badge right \
+           --set outlook_badge icon="󰴢" \
+                              icon.font="Hack Nerd Font:Regular:14.0" \
+                              icon.color=0xffffffff \
+                              icon.padding_right=2 \
+                              label="0" \
+                              label.font="Hack Nerd Font:Regular:12.0" \
+                              label.color=0xffffffff \
+                              label.padding_left=2 \
+                              label.padding_right=5 \
+                              background.color=0x1a1b26 \
+                              background.border_color=0xffffffff \
+                              background.border_width=1 \
+                              background.height=26 \
+                              background.corner_radius=8 \
+                              background.padding_left=5 \
+                              background.padding_right=5 \
+                              script="$HOME/.config/sketchybar/plugins/outlook_badge.sh" \
+                              update_freq=10 \
+                              updates=on \
+                              click_script="open -a 'Microsoft Outlook'"
+
+# Gitlab Pipelines, first one uses the gitlab_pipelines.sh for both
+# this should probably be used individually and passing the project 
+# into the script FIXME:
+sketchybar --add item gitlab.appcode right  \
+  --set gitlab.appcode update_freq=60 \
+    script="$HOME/.config/sketchybar/plugins/gitlab_pipelines.sh" \
+    icon.padding_right=5 \
+    label.padding_left=5 \
+    background.padding=5  \
+    popup.align=left \ 
+    updates=on \
+  --subscribe gitlab.appcode mouse.entered mouse.exited mouse.exited.global
+
+sketchybar --add item gitlab.builder right  \
+  --set gitlab.builder 
+    icon.padding_right=5 \ 
+    label.padding_left=5 \ 
+    background.padding=5 \ 
+    popup.align=left \ 
+  --subscribe gitlab.builder mouse.entered mouse.exited mouse.exited.global
+
+
+sketchybar --trigger dock_badge_update
+
+
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
+sketchybar --update
+
+echo "sketchybar configuation loaded.."
