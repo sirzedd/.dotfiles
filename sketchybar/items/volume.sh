@@ -25,6 +25,7 @@ volume_icon=(
   label.width=25
   label.align=left
   label.font="$FONT:Regular:14.0"
+  script="$PLUGIN_DIR/volume.sh"
 )
 
 status_bracket=(
@@ -33,15 +34,6 @@ status_bracket=(
   background.border_width=2
 )
 
-sketchybar --add slider volume right            \
-           --set volume "${volume_slider[@]}"   \
-           --subscribe volume volume_change     \
-                              mouse.clicked     \
-                              mouse.entered     \
-                              mouse.exited      \
-                                                \
-           --add item volume_icon right         \
-           --set volume_icon "${volume_icon[@]}"
-
-sketchybar --add bracket status brew github.bell volume_icon \
-           --set status "${status_bracket[@]}"
+sketchybar --add item volume_icon right        \
+           --set volume_icon "${volume_icon[@]}" \
+           --subscribe volume_icon volume_change

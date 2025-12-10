@@ -62,36 +62,17 @@ defaults=(
 
 sketchybar --default "${defaults[@]}"
 
-# Left
+# Left side (Apple icon and app name)
 source "$ITEM_DIR/apple.sh"
-
-# AeroSpace workspace
-# sketchybar --add event aerospace_workspace_change
-# sketchybar --add item workspace left \
-#            --set workspace script="$HOME/.config/sketchybar/plugins/aerospace_workspace.sh" \
-#                            label.padding_right=15 \
-#            --subscribe workspace aerospace_workspace_change
-# 
-# # Left
-# source "$ITEM_DIR/aerospace_binding.sh"
-# source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"
 
-
-# Center
-source "$ITEM_DIR/spotify.sh"
-
-# Right
-source "$ITEM_DIR/calendar.sh"
-source "$ITEM_DIR/brew.sh"
-source "$ITEM_DIR/github.sh"
-source "$ITEM_DIR/battery.sh"
+# Right side (in order: clock, date, volume, notifications, memory, cpu, teams, outlook, p2j version, gitlab projects)
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/date.sh"
 source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/notifications.sh"
+source "$ITEM_DIR/memory.sh"
 source "$ITEM_DIR/cpu.sh"
-
-
-# Register custom event for dock badge updates
-sketchybar --add event dock_badge_update com.apple.dock.badgechanged
 
 # Teams Notification Item
 sketchybar --add item teams_badge right \
@@ -111,6 +92,7 @@ sketchybar --add item teams_badge right \
                             background.corner_radius=8 \
                             background.padding_left=5 \
                             background.padding_right=5 \
+                            padding_right=10 \
                             script="$HOME/.config/sketchybar/plugins/teams_badge.sh" \
                             update_freq=10 \
                             updates=on \
@@ -134,69 +116,15 @@ sketchybar --add item outlook_badge right \
                               background.corner_radius=8 \
                               background.padding_left=5 \
                               background.padding_right=5 \
+                              padding_right=10 \
                               script="$HOME/.config/sketchybar/plugins/outlook_badge.sh" \
                               update_freq=10 \
                               updates=on \
                               click_script="open -a 'Microsoft Outlook'"
 
-# Gitlab Pipelines
-POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
-
-appcode_logo=(
-  icon.font="Hack Nerd Font:Regular:14.0"  
-  icon.color=$GREEN 
-  icon.padding_right=2  
-  padding_right=15 
-  icon.padding_right=5 
-  label.padding_left=5 
-  background.padding=5  
-  popup.align=left 
-  updates=on 
-  script="$PLUGIN_DIR/gitlab_pipeline.sh appcode" 
-  click_script="$POPUP_CLICK_SCRIPT"
-)
-builder_logo=(
-  icon.font="Hack Nerd Font:Regular:14.0"  
-  icon.color=$GREEN 
-  icon.padding_right=2  
-  padding_right=15 
-  icon.padding_right=5 
-  label.padding_left=5 
-  background.padding=5  
-  popup.align=left 
-  updates=on 
-  script="$PLUGIN_DIR/gitlab_pipeline.sh builder" 
-  click_script="$POPUP_CLICK_SCRIPT"
-)
-watchpipeline_logo=(
-  icon.font="Hack Nerd Font:Regular:14.0"  
-#  icon.color=$GREEN 
-  icon.padding_right=2  
-  padding_right=15 
-  icon.padding_right=5 
-  label.padding_left=5 
-  background.padding=5  
-  popup.align=left 
-)
-
-sketchybar --add item gitlab.appcode right  \
-  --set gitlab.appcode "${appcode_logo[@]}" 
-
-sketchybar --add item gitlab.builder right  \
-  --set gitlab.builder "${builder_logo[@]}" 
-
-sketchybar --add item gitlab.watchpipeline right  \
-  --set gitlab.watchpipeline "${watchpipeline_logo[@]}" 
-
-
-sketchybar --add item gitlab.builder.popup popup.gitlab.builder
-sketchybar --add item gitlab.appcode.popup popup.gitlab.appcode
-
-
-  ##############################
-
-
-sketchybar --trigger dock_badge_update
+# P2J Version and GitLab Projects
+source "$ITEM_DIR/p2j_version.sh"
+source "$ITEM_DIR/gitlab_projects.sh"
 
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
