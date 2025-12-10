@@ -43,6 +43,8 @@ alias lscount="ls | wc -l"
 # List extensions in a directory
 alias list_directory_extensions="find . -type f -name \"*.*\" | sed -n 's|.*\.||p' | sort | uniq"
 
+alias ls="ls -a"
+
 
 ## Need docker or podman
 ## alias docker=podman

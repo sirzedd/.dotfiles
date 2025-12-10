@@ -1,3 +1,4 @@
+# Fast gradle 
 function gw() {
     if [ -f "./gradlew" ]; then
         ./gradlew "$@"
@@ -7,11 +8,13 @@ function gw() {
 }
 
 
+# 2025-11-05 - I'm commenting this out as I found a place where gradlew doesn't work 
+#              and I can't fallback to gradle to fix wrapper
 # First run the gradlew command, if it doesn't exist use the installed gradle
-gradle() {
-    if [ -f "./gradlew" ]; then
-        ./gradlew "$@"
-    else
-        command gradle "$@"
-    fi
-}
+#gradle() {
+#    if [ -f "./gradlew" ]; then
+#        ./gradlew "$@"
+#    else
+#        command gradle "$@"
+#    fi
+#}
