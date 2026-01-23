@@ -2,22 +2,19 @@
 [user]
 # Please adapt and uncomment the following lines:
 name = Joshua Hendricks
-email = joshua.hendricks@infor.com
+email = 
 [alias]
-  # Git Town
-#	append = town append
-#	hack = town hack
-#	kill = town kill
-#	new-pull-request = town new-pull-request
-#	prepend = town prepend
-#	prune-branches = town prune-branches
-#	rename-branch = town rename-branch
-#	repo = town repo
-#	ship = town ship
-#	sync = town sync
-#
+# Git Town
 #	Using git tool called git-branchless
 #
+# Smart pull stash, pull, then stash pop
+  smart-pull = "!f() { git stash push -m 'auto-stash'; git pull; git stash pop; }; f"
+# Quick pull of current
+  push-current = push origin HEAD
+# Sync with main
+  sync-main = "!f() { git fetch origin main:main && git merge main; }; f"
+
+
 # STASHING 
   save = stash push -m # git save "feature"
   stashes = stash list #     git stashes shows list
@@ -58,13 +55,11 @@ email = joshua.hendricks@infor.com
   #  quick stash 
   st = !git stash push -m
 
+# commit with template
   cm = !bash -c git-commit-template
 
   ls = log --oneline
-  #fdiff = "! preview='git diff $@ --color=always -- {-1}' && git diff $@ --name-only | fzf -m --ansi --preview $preview "
-  #fdiff = "! gitdiff"
-  #gra =   "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
-  #la = "!git config -l | grep alias | cut -c 7-"
+
   cod = checkout  develop
   fb = !zsh -c fbr
   fadd = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
@@ -74,18 +69,29 @@ email = joshua.hendricks@infor.com
   fdiff = "!fdiff"
   fstash = "!fstash"  
   echo = !echo $PATH
-#  co = checkout
-#  cob = checkout -b
-#  del = branch -D
-#  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-#  res = !git reset --hard
-#  done = !git push origin HEAD
-#  undo = reset HEAD~1 --mixed
+## Commit with same message as last
+	redo = commit --reuse-message=HEAD
+## quikc push 
+	p = push origin HEAD
+# interactive add
+	patch = add -p
+# interactive remove
+	unpatch = reset -p
   
 [core]
 	editor = /opt/homebrew/bin/nvim
+  pager = delta
 [branch]
 #	autoSetupMerge = off
 [commit]
 	template = /Users/joshua.hendricks/.dotfiles/git/git-commit-message.txt
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    side-by-side = true
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+[merge]
+  conflictstyle = zdiff3
+	log = false
 
